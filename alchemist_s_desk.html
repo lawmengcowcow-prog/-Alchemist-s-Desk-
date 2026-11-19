@@ -1,0 +1,3021 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鍊金術士的魔導書桌：大魔導書典藏版 | Alchemist's Desk: Grand Grimoire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brass-light: #ffe39f;
+      --brass-mid: #c89643;
+      --brass-dark: #5c3c16;
+    }
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #261811 0%, #0e0906 100%);
+      font-family: 'Noto Serif TC', 'Cinzel', serif;
+      color: #f5e6c8;
+    }
+    .brass-panel {
+      background: linear-gradient(145deg, rgba(40, 28, 20, 0.96), rgba(22, 15, 11, 0.98));
+      border: 2px solid var(--brass-mid);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 228, 168, 0.25);
+    }
+    .parchment-card {
+      background: linear-gradient(135deg, #f0dbb0 0%, #d8b77c 100%);
+      color: #2f1e12;
+      border: 2px solid #754c24;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), inset 0 0 24px rgba(117, 76, 36, 0.25);
+    }
+    .brass-btn {
+      background: linear-gradient(180deg, #523924 0%, #2e1f14 100%);
+      border: 1.5px solid #c99846;
+      color: #fae6be;
+      transition: all 0.15s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,230,170,0.25);
+      cursor: pointer;
+    }
+    .brass-btn:hover:not(:disabled) {
+      background: linear-gradient(180deg, #69492e 0%, #3d291a 100%);
+      border-color: #ffe094;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px rgba(201, 152, 70, 0.35);
+    }
+    .brass-btn:active:not(:disabled) { transform: translateY(1px); }
+    .brass-btn:disabled { opacity: 0.42; cursor: not-allowed; filter: grayscale(0.5); }
+    .wax-btn {
+      background: radial-gradient(circle at 30% 30%, #c93b2b, #7d1910);
+      border: 2px solid #f0b265;
+      color: #fff3db;
+      box-shadow: 0 4px 14px rgba(180, 30, 20, 0.55), inset 0 2px 4px rgba(255,255,255,0.25);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .wax-btn:hover:not(:disabled) { filter: brightness(1.14); transform: scale(1.02); }
+    .wax-btn:disabled { opacity: 0.48; cursor: not-allowed; }
+    .emerald-btn {
+      background: linear-gradient(180deg, #1f6e58 0%, #114234 100%);
+      border: 1.5px solid #68e0b8;
+      color: #e6fff6;
+      box-shadow: 0 4px 12px rgba(17, 66, 52, 0.6);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .emerald-btn:hover:not(:disabled) { filter: brightness(1.12); transform: translateY(-1px); }
+    .emerald-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .fusion-btn {
+      background: linear-gradient(135deg, #164e63 0%, #581c87 55%, #7c2d12 100%);
+      border: 2px solid #67e8f9;
+      color: #fef3c7;
+      box-shadow: 0 4px 16px rgba(103, 232, 249, 0.4);
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .fusion-btn:hover:not(:disabled) { filter: brightness(1.16); transform: translateY(-1px); }
+    .fusion-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 8px rgba(246, 216, 140, 0.4); }
+      50% { box-shadow: 0 0 20px rgba(246, 216, 140, 0.95); }
+    }
+    .pulse-ring { animation: pulseGlow 2s infinite; }
+  </style>
+</head>
+<body class="relative w-screen h-screen flex items-center justify-center">
+
+  <!-- ==================== 1. START COVER SCREEN ==================== -->
+  <div id="start-cover-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-[#140b06] select-none">
+    <img id="cover-static-img" src="https://i.postimg.cc/g0v0ksp0/IMG-9188.jpg" referrerpolicy="no-referrer" alt="鍊金術士的魔導書桌封面" class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,8,4,0.18)_0%,rgba(8,4,2,0.68)_100%)] pointer-events-none"></div>
+
+    <div class="relative z-20 flex flex-col items-center text-center px-4 mt-14 md:mt-20">
+      <div class="text-xs md:text-sm tracking-[0.28em] text-amber-200/95 font-bold uppercase mb-2 drop-shadow">
+        ALCHEMIST'S DESK : GRAND GRIMOIRE
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-[#fff7dc] via-[#f6d173] to-[#c98a2c] drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)]" style="text-shadow: 0 0 26px rgba(246, 200, 100, 0.4);">
+        鍊金術士的魔導書桌
+      </h1>
+      <div class="text-sm md:text-base tracking-[0.2em] text-amber-100/95 font-bold mt-2 mb-7 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+        大魔導書典藏版 · GRAND GRIMOIRE EDITION
+      </div>
+
+      <div class="flex flex-col items-center w-72 md:w-80 space-y-3">
+        <button id="btn-start-main" class="w-full py-3 px-6 rounded-xl bg-gradient-to-b from-[#a84420] to-[#6e220c] hover:from-[#bf5028] hover:to-[#822910] border-2 border-[#e6a145] text-[#fff5e0] shadow-[0_6px_22px_rgba(0,0,0,0.88)] transition transform hover:-translate-y-0.5 cursor-pointer flex flex-col items-center justify-center">
+          <span class="text-lg font-black tracking-widest leading-tight">開始遊戲</span>
+        </button>
+        <button id="btn-audio-main" class="w-full py-3 px-6 rounded-xl bg-gradient-to-b from-[#3b2a1a]/95 to-[#21160d]/95 hover:from-[#4f3822] hover:to-[#2e1f13] border border-[#c89643]/85 text-[#f5e4c3] shadow-[0_6px_18px_rgba(0,0,0,0.82)] transition transform hover:-translate-y-0.5 cursor-pointer flex flex-col items-center justify-center">
+          <span class="text-base font-bold tracking-widest leading-tight">調整聲音</span>
+        </button>
+        <button id="btn-codex-main" class="w-full py-3 px-6 rounded-xl bg-gradient-to-b from-[#3b2a1a]/95 to-[#21160d]/95 hover:from-[#4f3822] hover:to-[#2e1f13] border border-[#c89643]/85 text-[#f5e4c3] shadow-[0_6px_18px_rgba(0,0,0,0.82)] transition transform hover:-translate-y-0.5 cursor-pointer flex flex-col items-center justify-center">
+          <span class="text-base font-bold tracking-widest leading-tight">魔導圖鑑</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== AUDIO SETTINGS MODAL ==================== -->
+  <div id="modal-audio" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+    <div class="brass-panel max-w-lg w-full rounded-2xl p-6 space-y-5 border-2 border-amber-400/80">
+      <div class="flex items-center justify-between border-b border-amber-500/30 pb-3">
+        <div>
+          <h3 class="text-xl font-black text-amber-200">🎵 魔導音律與音效設定</h3>
+          <p class="text-sm text-amber-100/80 mt-0.5">《鐘擺與稜鏡》118 BPM 室內樂合成器</p>
+        </div>
+        <button id="btn-close-audio" class="brass-btn w-8 h-8 rounded-full text-sm font-bold">✕</button>
+      </div>
+
+      <div class="space-y-4 text-sm">
+        <div>
+          <div class="flex justify-between mb-1.5 font-bold text-amber-200">
+            <span>主音量 (Master)</span>
+            <span id="val-vol-master">85%</span>
+          </div>
+          <input id="rng-vol-master" type="range" min="0" max="100" value="85" class="w-full accent-amber-500 cursor-pointer h-2" />
+        </div>
+        <div>
+          <div class="flex justify-between mb-1.5 font-bold text-amber-200">
+            <span>背景音樂音量 (BGM)</span>
+            <span id="val-vol-music">75%</span>
+          </div>
+          <input id="rng-vol-music" type="range" min="0" max="100" value="75" class="w-full accent-amber-500 cursor-pointer h-2" />
+        </div>
+        <div>
+          <div class="flex justify-between mb-1.5 font-bold text-amber-200">
+            <span>戰鬥音效音量 (SFX)</span>
+            <span id="val-vol-sfx">85%</span>
+          </div>
+          <input id="rng-vol-sfx" type="range" min="0" max="100" value="85" class="w-full accent-amber-500 cursor-pointer h-2" />
+        </div>
+        <div class="pt-3 border-t border-amber-500/25 flex items-center justify-between gap-3">
+          <div>
+            <div class="font-bold text-amber-200">載入自訂背景音樂 (MP3 / WAV)</div>
+            <div class="text-xs text-amber-100/75 mt-0.5" id="bgm-source-label">目前使用：內建《鐘擺與稜鏡》合成器</div>
+          </div>
+          <label class="emerald-btn px-3.5 py-2 rounded-lg text-sm font-bold cursor-pointer shrink-0">
+            📂 選擇音訊檔
+            <input type="file" id="inp-bgm-file" accept="audio/*" class="hidden" />
+          </label>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button id="btn-save-audio" class="wax-btn px-6 py-2.5 rounded-xl text-sm font-black">確認並返回</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. MAIN 2.5D BATTLEFIELD STAGE ==================== -->
+  <div id="stage-wrapper" class="relative w-full h-full flex items-center justify-center overflow-hidden">
+    <canvas id="game-canvas" class="block shadow-2xl rounded-lg border-2 border-amber-700/60 cursor-crosshair"></canvas>
+
+    <!-- Top Tactical HUD Bar -->
+    <div id="hud-top" class="fixed top-2 left-2 right-2 md:left-4 md:right-4 flex flex-wrap items-center justify-between gap-2 px-3.5 py-2 rounded-xl brass-panel z-20 pointer-events-auto">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-full bg-amber-950 border-2 border-amber-400 flex items-center justify-center shadow-inner text-xl">⚗️</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base md:text-lg font-black tracking-wider text-amber-200 leading-tight">鍊金術士的魔導書桌</h1>
+            <span id="ui-diff-badge" class="text-xs px-2.5 py-0.5 rounded bg-red-950/90 border border-amber-400/70 text-amber-200 font-bold">大賢者</span>
+          </div>
+          <p id="ui-map-subtitle" class="text-xs md:text-sm text-emerald-300/95 font-bold leading-tight mt-0.5">初階手稿：單向蒸餾槽</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="px-3 py-1 rounded-lg bg-black/55 border border-rose-500/65 flex items-center gap-1.5">
+          <span class="text-rose-400 text-base">♦</span>
+          <span class="text-sm text-amber-100/85 font-bold">石心</span>
+          <span id="val-life" class="text-base md:text-lg font-black text-rose-300">15/15</span>
+        </div>
+        <div class="px-3 py-1 rounded-lg bg-black/55 border border-amber-400/65 flex items-center gap-1.5">
+          <span class="text-amber-300 text-base">🪙</span>
+          <span class="text-sm text-amber-100/85 font-bold">金幣</span>
+          <span id="val-gold" class="text-base md:text-lg font-black text-amber-300">185</span>
+        </div>
+        <div class="px-3 py-1 rounded-lg bg-black/55 border border-emerald-400/65 flex items-center gap-1.5">
+          <span class="text-emerald-300 text-base">🌊</span>
+          <span class="text-sm text-amber-100/85 font-bold">波次</span>
+          <span id="val-wave" class="text-base md:text-lg font-black text-emerald-300">1/12</span>
+        </div>
+        <button id="btn-open-talents" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 border-purple-400/80">
+          <span class="text-purple-300">✦</span>
+          <span>天賦</span>
+          <span id="val-aether" class="text-purple-200 font-black">30</span>
+        </button>
+        <button id="btn-open-codex" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">📖 圖鑑</button>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button id="btn-speed" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">1x</button>
+        <button id="btn-autowave" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">自動: OFF</button>
+        <button id="btn-pause" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">暫停</button>
+        <button id="btn-music" class="brass-btn px-2.5 py-1.5 rounded-lg text-sm font-bold" title="背景音樂">🎵</button>
+        <button id="btn-sfx" class="brass-btn px-2.5 py-1.5 rounded-lg text-sm font-bold" title="戰鬥音效">🔊</button>
+        <button id="btn-hud-audio" class="brass-btn px-2.5 py-1.5 rounded-lg text-sm font-bold" title="調整聲音">⚙️</button>
+        <button id="btn-menu" class="brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">選單</button>
+      </div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div id="warning-banner" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-30 px-6 py-2.5 rounded-xl bg-red-950/95 border-2 border-amber-400 text-amber-100 text-sm md:text-base font-bold shadow-2xl pointer-events-none text-center max-w-3xl leading-relaxed"></div>
+
+    <!-- Bottom Tactical Dock -->
+    <div class="fixed bottom-2.5 left-2.5 right-2.5 z-20 flex flex-wrap items-end justify-between gap-2 pointer-events-none">
+      <!-- Bottom Left: Active Desk Spells -->
+      <div class="flex items-center gap-2 pointer-events-auto">
+        <button id="btn-spell-0" class="brass-btn px-3.5 py-2 rounded-xl flex items-center gap-2 border-amber-400/80">
+          <span class="text-xl">☄️</span>
+          <div class="text-left">
+            <div class="text-sm font-black text-amber-200 leading-tight">火漆隕落 [Z]</div>
+            <div class="text-xs text-amber-100/90 font-semibold mt-0.5" id="spell-0-status">就緒 (破盾+定身3s)</div>
+          </div>
+        </button>
+        <button id="btn-spell-1" class="brass-btn px-3.5 py-2 rounded-xl flex items-center gap-2 border-cyan-400/80">
+          <span class="text-xl">⏳</span>
+          <div class="text-left">
+            <div class="text-sm font-black text-cyan-200 leading-tight">懷錶凝滯 [C]</div>
+            <div class="text-xs text-cyan-100/90 font-semibold mt-0.5" id="spell-1-status">就緒 (緩速+加速塔)</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Bottom Center: Quick-Build Dock & Mode Cancel Pill -->
+      <div class="flex flex-col items-center gap-1.5 pointer-events-auto">
+        <button id="mode-cancel-pill" class="hidden px-4 py-1 rounded-full bg-amber-950/95 border-2 border-cyan-300 text-amber-100 text-sm font-bold shadow-lg hover:bg-amber-900 transition cursor-pointer">
+          ✕ 取消目前模式 [ESC / 右鍵]
+        </button>
+        <div id="quick-build-dock" class="brass-panel px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 flex-wrap justify-center">
+          <button data-qmode="tower" data-qid="0" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px]">
+            <div class="text-sm font-black text-amber-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[1]</span>🖋️鋼筆弩</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 60</div>
+          </button>
+          <button data-qmode="tower" data-qid="1" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px]">
+            <div class="text-sm font-black text-emerald-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[2]</span>💧水銀儀</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 70</div>
+          </button>
+          <button data-qmode="tower" data-qid="2" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px]">
+            <div class="text-sm font-black text-purple-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[3]</span>🔮稜鏡儀</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 90</div>
+          </button>
+          <button data-qmode="tower" data-qid="3" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px]">
+            <div class="text-sm font-black text-orange-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[4]</span>🧪臼砲</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 85</div>
+          </button>
+          <div class="w-px h-8 bg-amber-500/35 mx-0.5 hidden sm:block"></div>
+          <button data-qmode="trap" data-qkind="wax" data-qcost="45" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px] border-rose-400/70">
+            <div class="text-sm font-black text-rose-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[5]</span>🔴火漆印</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 45</div>
+          </button>
+          <button data-qmode="trap" data-qkind="mercury" data-qcost="50" class="qbuild-btn brass-btn px-3 py-1.5 rounded-lg flex flex-col items-center min-w-[82px] border-cyan-400/70">
+            <div class="text-sm font-black text-cyan-200 leading-tight"><span class="text-xs text-amber-300/80 mr-0.5">[6]</span>❄️水銀陣</div>
+            <div class="qbuild-cost text-xs font-black text-amber-300 mt-0.5">🪙 50</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Right: Next Wave Preview + Send Wave -->
+      <div class="flex flex-col items-end gap-1.5 pointer-events-auto">
+        <div id="wave-preview-bar" class="brass-panel px-3.5 py-1.5 rounded-xl flex items-center gap-2 flex-wrap justify-end max-w-md">
+          <span id="wave-preview-title" class="text-sm font-black text-amber-200">第 1 波預告</span>
+          <span id="wave-preview-total" class="text-sm font-bold text-emerald-300">共 12 隻</span>
+          <div id="wave-preview-badges" class="flex items-center gap-1.5 flex-wrap"></div>
+        </div>
+        <button id="btn-next-wave" class="wax-btn px-5 py-2.5 rounded-xl text-sm md:text-base font-black tracking-wide pulse-ring flex items-center gap-2">
+          <span>⚔️</span>
+          <span id="lbl-send-wave">開始第 1 波 (Space)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Context Menu (w-96 = 384px) -->
+    <div id="floating-menu" class="hidden fixed z-30 w-96 rounded-xl brass-panel p-4 pointer-events-auto shadow-2xl max-h-[82vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-amber-500/30 pb-2.5 mb-3">
+        <div>
+          <h3 id="fmenu-title" class="text-lg font-black text-amber-200">建造魔導器械</h3>
+          <p id="fmenu-sub" class="text-sm text-emerald-300/95 font-semibold mt-0.5">點擊下方器械立即部署於此方格</p>
+        </div>
+        <button id="btn-close-fmenu" class="brass-btn w-7 h-7 rounded-full text-sm flex items-center justify-center font-bold shrink-0">✕</button>
+      </div>
+      <div id="fmenu-body" class="space-y-2.5"></div>
+    </div>
+
+    <!-- Title / Manuscript Selection Modal -->
+    <div id="modal-title" class="hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+      <div class="parchment-card max-w-5xl w-full rounded-2xl p-6 max-h-[92vh] overflow-y-auto">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-amber-900/30 pb-4 mb-5">
+          <div>
+            <div class="text-xs font-extrabold uppercase tracking-widest text-amber-900/75">ALCHEMIST'S DESK : GRAND GRIMOIRE EDITION</div>
+            <h2 class="text-2xl md:text-3xl font-black text-amber-950">鍊金術士的魔導書桌・大魔導書典藏版</h2>
+            <p class="text-sm text-amber-900 font-bold mt-1">18×10 棋盤方格戰場｜6 種 Lv.4 滿級異種合成、無限鍊金超頻與專屬地形機制。</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="px-3.5 py-2 rounded-xl bg-amber-950 text-amber-200 border border-amber-500 text-sm font-bold">
+              ✦ 以太結晶: <span id="title-aether" class="font-black text-purple-300">30</span>
+            </div>
+            <button id="btn-title-talents" class="brass-btn px-3.5 py-2 rounded-xl text-sm font-bold">✦ 天賦聖典</button>
+            <button id="btn-back-cover" class="brass-btn px-3.5 py-2 rounded-xl text-sm font-bold">🏠 封面</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-5">
+          <div class="flex items-center justify-between bg-amber-950/15 border border-amber-900/35 rounded-xl px-4 py-3 gap-2">
+            <div>
+              <div class="text-sm font-black text-amber-950">⚔️ 戰術難度階級</div>
+              <div class="text-xs text-amber-900/90 mt-0.5">領主與巨甲蟲每 6 秒施放奧術護盾脈衝</div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button data-diff="0" class="diff-btn brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">學徒</button>
+              <button data-diff="1" class="diff-btn brass-btn px-3 py-1.5 rounded-lg text-sm font-bold">大賢者</button>
+              <button data-diff="2" class="diff-btn wax-btn px-3 py-1.5 rounded-lg text-sm font-bold">煉獄</button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between bg-amber-950/15 border border-amber-900/35 rounded-xl px-4 py-3 gap-2">
+            <div>
+              <div class="text-sm font-black text-amber-950">♾️ 無盡深淵模式</div>
+              <div class="text-xs text-amber-900/90 mt-0.5">波次無上限，搭配 Lv.4 合成與無限超頻挑戰極限</div>
+            </div>
+            <label class="flex items-center gap-2 cursor-pointer bg-amber-950/20 px-3.5 py-2 rounded-lg border border-amber-900/30 shrink-0">
+              <input type="checkbox" id="chk-endless" class="w-4 h-4 accent-amber-900 cursor-pointer" />
+              <span class="text-sm font-black text-amber-950">啟用無盡</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="map-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5"></div>
+
+        <div class="bg-amber-950/15 border border-amber-900/30 rounded-xl p-4 text-sm text-amber-950 grid grid-cols-1 md:grid-cols-3 gap-3 leading-relaxed">
+          <div><strong>⚗️ Lv.4 異種合成：</strong>上下左右相鄰的兩座不同 Lv.3 砲塔可支付 80 金幣合成為 6 種禁忌器械！</div>
+          <div><strong>⚡ 無限鍊金超頻：</strong>Lv.3 與 Lv.4 砲塔可無限超頻（+15% 傷害與 +4 射程），突破無盡模式上限。</div>
+          <div><strong>🏺 強制集火拆障：</strong>點擊障礙物強制集火拆除，解鎖 <strong>★黃金符文 (+15% 全能)</strong> 與星象高台。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talents Modal -->
+    <div id="modal-talents" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+      <div class="brass-panel max-w-3xl w-full rounded-2xl p-6">
+        <div class="flex items-center justify-between border-b border-amber-500/30 pb-3.5 mb-5">
+          <div>
+            <h3 class="text-xl font-black text-amber-200">✦ 鍊金天賦聖典</h3>
+            <p class="text-sm text-amber-100/80 mt-0.5">消耗「以太結晶」永久強化所有手稿戰力</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="px-3.5 py-1.5 rounded-lg bg-purple-950 border border-purple-400 text-sm font-bold text-purple-200">可用結晶: <strong id="talent-modal-aether">30</strong></span>
+            <button id="btn-close-talents" class="brass-btn px-3.5 py-1.5 rounded-lg text-sm font-bold">關閉</button>
+          </div>
+        </div>
+        <div id="talents-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
+      </div>
+    </div>
+
+    <!-- Codex Modal -->
+    <div id="modal-codex" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+      <div class="brass-panel max-w-5xl w-full rounded-2xl p-6 max-h-[88vh] overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-amber-500/30 pb-3.5 mb-5">
+          <h3 class="text-xl font-black text-amber-200">📖 魔導手稿圖鑑與 Lv.4 合成配方</h3>
+          <button id="btn-close-codex" class="brass-btn px-3.5 py-1.5 rounded-lg text-sm font-bold">關閉</button>
+        </div>
+        <div id="codex-body" class="space-y-5 text-sm leading-relaxed"></div>
+      </div>
+    </div>
+
+    <!-- Victory / Defeat Result Modal -->
+    <div id="modal-result" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+      <div class="parchment-card max-w-lg w-full rounded-2xl p-7 text-center">
+        <div id="res-icon" class="text-5xl mb-2">🏆</div>
+        <h3 id="res-title" class="text-2xl font-black text-amber-950 mb-1">手稿封印完成！</h3>
+        <p id="res-subtitle" class="text-sm text-amber-900 font-bold mb-4">初階手稿：單向蒸餾槽</p>
+        <div id="res-stars" class="flex justify-center gap-2 text-4xl mb-4 text-amber-600"></div>
+        <div class="bg-amber-950/15 border border-amber-900/30 rounded-xl p-4 mb-5 text-sm space-y-1.5 text-amber-950 font-bold">
+          <div>剩餘石心：<span id="res-life">15 / 15</span></div>
+          <div>本局獲得以太結晶：<span id="res-aether" class="text-purple-900 font-black">+18 ✦</span></div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button id="btn-res-retry" class="brass-btn px-5 py-2.5 rounded-xl text-sm font-bold">再次挑戰</button>
+          <button id="btn-res-endless" class="emerald-btn px-5 py-2.5 rounded-xl text-sm font-bold">♾️ 繼續無盡深淵</button>
+          <button id="btn-res-menu" class="wax-btn px-5 py-2.5 rounded-xl text-sm font-bold">選擇手稿</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const LOGICAL_W = 1280;
+    const LOGICAL_H = 720;
+    const GRID_COLS = 18;
+    const GRID_ROWS = 10;
+    const TILE_SIZE = 60;
+    const GRID_OFFSET_X = (LOGICAL_W - GRID_COLS * TILE_SIZE) / 2;
+    const GRID_OFFSET_Y = (LOGICAL_H - GRID_ROWS * TILE_SIZE) / 2;
+
+    let currentDpr = 1;
+    const bakedMapCanvases = [null, null, null];
+
+    function tileKey(c, r) { return `${c},${r}`; }
+    function tileCenter(c, r) {
+      return {
+        x: GRID_OFFSET_X + c * TILE_SIZE + TILE_SIZE / 2,
+        y: GRID_OFFSET_Y + r * TILE_SIZE + TILE_SIZE / 2
+      };
+    }
+    function worldToGrid(x, y) {
+      const col = Math.floor((x - GRID_OFFSET_X) / TILE_SIZE);
+      const row = Math.floor((y - GRID_OFFSET_Y) / TILE_SIZE);
+      if (col < 0 || col >= GRID_COLS || row < 0 || row >= GRID_ROWS) return null;
+      return { col, row };
+    }
+
+    function resizeStage() {
+      const scale = Math.min(window.innerWidth / LOGICAL_W, window.innerHeight / LOGICAL_H);
+      currentDpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(LOGICAL_W * currentDpr);
+      canvas.height = Math.floor(LOGICAL_H * currentDpr);
+      canvas.style.width = `${Math.floor(LOGICAL_W * scale)}px`;
+      canvas.style.height = `${Math.floor(LOGICAL_H * scale)}px`;
+      ctx.setTransform(currentDpr, 0, 0, currentDpr, 0, 0);
+    }
+    window.addEventListener('resize', resizeStage);
+    resizeStage();
+
+    // ==================== 2. GEOMETRY & PARTICLES ====================
+    function distToSegment(px, py, x1, y1, x2, y2) {
+      const l2 = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+      if (l2 === 0) return Math.hypot(px - x1, py - y1);
+      let t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / l2;
+      t = Math.max(0, Math.min(1, t));
+      return Math.hypot(px - (x1 + t * (x2 - x1)), py - (y1 + t * (y2 - y1)));
+    }
+
+    function spawnParticles(x, y, color, count = 12) {
+      for (let i = 0; i < count; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const spd = 25 + Math.random() * 95;
+        state.particles.push({
+          x, y, vx: Math.cos(a) * spd, vy: Math.sin(a) * spd - 15,
+          r: 2 + Math.random() * 2.8, color, ttl: 0.35 + Math.random() * 0.35
+        });
+      }
+    }
+
+    function drawCrossHatch(g, x, y, w, h, step = 6, alpha = 0.22) {
+      g.save();
+      g.strokeStyle = `rgba(20, 11, 5, ${alpha})`;
+      g.lineWidth = 1.1;
+      g.beginPath();
+      for (let i = -h; i < w + h; i += step) {
+        g.moveTo(x + i, y);
+        g.lineTo(x + i - h * 0.55, y + h);
+      }
+      g.stroke();
+      g.restore();
+    }
+
+    // ==================== 3. WEB AUDIO API SYNTHESIZER ====================
+    const audio = {
+      ctx: null, master: null, musicOn: true, sfxOn: true,
+      masterVol: 0.85, musicVol: 0.75, sfxVol: 0.85,
+      customBgmEl: null, lastSfx: {}, musicTimer: null, noteStep: 0,
+      init() {
+        try {
+          if (this.ctx) {
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            return;
+          }
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          this.ctx = new AC();
+          const comp = this.ctx.createDynamicsCompressor();
+          comp.threshold.value = -18;
+          comp.ratio.value = 4;
+          comp.connect(this.ctx.destination);
+          this.master = comp;
+          this.startMusicLoop();
+        } catch (e) {}
+      },
+      playTone(f1, f2, dur = 0.09, type = 'triangle', gainVal = 0.12, tag = 'gen') {
+        if (!this.sfxOn || !this.ctx || !this.master) return;
+        try {
+          const now = performance.now();
+          if (this.lastSfx[tag] && now - this.lastSfx[tag] < 45) return;
+          this.lastSfx[tag] = now;
+          const vol = gainVal * this.masterVol * this.sfxVol;
+          if (vol <= 0.001) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const g = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(f1, t);
+          osc.frequency.exponentialRampToValueAtTime(Math.max(30, f2), t + dur);
+          g.gain.setValueAtTime(vol, t);
+          g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+          osc.connect(g); g.connect(this.master);
+          osc.start(t); osc.stop(t + dur);
+        } catch (e) {}
+      },
+      playBuild() { this.playTone(360, 720, 0.12, 'triangle', 0.16, 'build'); },
+      playFusion() { this.playTone(280, 960, 0.28, 'sine', 0.22, 'fusion'); },
+      playShoot() { this.playTone(760, 310, 0.06, 'sawtooth', 0.09, 'shoot'); },
+      playStamp() { this.playTone(165, 54, 0.17, 'sine', 0.22, 'stamp'); },
+      playLaser() { this.playTone(940, 1280, 0.08, 'sine', 0.08, 'laser'); },
+      playBlast() { this.playTone(220, 48, 0.22, 'sawtooth', 0.20, 'blast'); },
+      startMusicLoop() {
+        if (this.musicTimer) clearInterval(this.musicTimer);
+        const melody = [293.66, 349.23, 440.00, 587.33, 523.25, 440.00, 392.00, 349.23, 329.63, 392.00, 493.88, 587.33, 554.37, 440.00, 369.99, 440.00];
+        const bass = [146.83, 146.83, 174.61, 174.61, 130.81, 130.81, 110.00, 146.83];
+        this.musicTimer = setInterval(() => {
+          if (!this.musicOn) {
+            if (this.customBgmEl && !this.customBgmEl.paused) this.customBgmEl.pause();
+            return;
+          }
+          if (this.customBgmEl) {
+            this.customBgmEl.volume = Math.min(1, this.masterVol * this.musicVol);
+            if (this.customBgmEl.paused) this.customBgmEl.play().catch(() => {});
+            return;
+          }
+          if (!this.ctx || !this.master) return;
+          const mVol = this.masterVol * this.musicVol;
+          if (mVol <= 0.002) return;
+          try {
+            const step = this.noteStep++;
+            const freq = melody[step % melody.length];
+            const t = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, t);
+            g.gain.setValueAtTime(0.025 * mVol, t);
+            g.gain.exponentialRampToValueAtTime(0.0008, t + 0.22);
+            osc.connect(g); g.connect(this.master);
+            osc.start(t); osc.stop(t + 0.24);
+            if (step % 2 === 0) {
+              const bFreq = bass[(step / 2) % bass.length];
+              const bOsc = this.ctx.createOscillator();
+              const bGain = this.ctx.createGain();
+              bOsc.type = 'triangle';
+              bOsc.frequency.setValueAtTime(bFreq, t);
+              bGain.gain.setValueAtTime(0.042 * mVol, t);
+              bGain.gain.exponentialRampToValueAtTime(0.001, t + 0.32);
+              bOsc.connect(bGain); bGain.connect(this.master);
+              bOsc.start(t); bOsc.stop(t + 0.34);
+            }
+          } catch (e) {}
+        }, 254);
+      }
+    };
+
+    // ==================== 4. MAPS, BASE TOWERS & LV.4 FUSION RECIPES ====================
+    function buildPathTileSet(gridPaths) {
+      const set = new Set();
+      gridPaths.forEach(route => {
+        for (let i = 0; i < route.length - 1; i++) {
+          let [c1, r1] = route[i];
+          const [c2, r2] = route[i + 1];
+          const dc = Math.sign(c2 - c1);
+          const dr = Math.sign(r2 - r1);
+          set.add(tileKey(c1, r1));
+          while (c1 !== c2 || r1 !== r2) {
+            c1 += dc; r1 += dr;
+            set.add(tileKey(c1, r1));
+          }
+        }
+      });
+      return set;
+    }
+
+    const RAW_MAPS = [
+      {
+        theme: 'alembic',
+        nameZh: '初階手稿：單向蒸餾槽',
+        descZh: '12 波標準試煉｜蜿蜒單向蒸餾管路，利用兩處「高熱節點」配合水銀/稜鏡/臼砲打出過熱爆發。',
+        mechanicBadgeZh: '🔥 高熱節點：魔物過熱 4s（受水銀/稜鏡/臼砲傷害 +25%）',
+        waves: 12,
+        gridPaths: [
+          [[0, 1], [4, 1], [4, 5], [1, 5], [1, 8], [7, 8], [7, 2], [12, 2], [12, 7], [15, 7], [15, 4], [17, 4]]
+        ],
+        hotspots: [[4, 3], [12, 4]],
+        astralDais: [], blockedTiles: [], cursedAltars: [],
+        props: [
+          { col: 2, row: 3, kind: 'waxblock', hp: 460, reward: 95 },
+          { col: 5, row: 6, kind: 'inkwell', hp: 520, reward: 110 },
+          { col: 9, row: 4, kind: 'crystal', hp: 640, reward: 130 },
+          { col: 13, row: 5, kind: 'crystal', hp: 620, reward: 125 },
+          { col: 10, row: 6, kind: 'inkwell', hp: 540, reward: 115 }
+        ]
+      },
+      {
+        theme: 'grimoire',
+        nameZh: '進階雙頁：交錯星象儀',
+        descZh: '15 波進階試煉｜雙頁展開古籍！雙路線於書脊 (8,4) 十字交錯，拆除水晶解鎖星象增幅高台。',
+        mechanicBadgeZh: '✨ 星象高台 (+20% 射程，可疊加黃金符文)｜📖 書脊滑坡 (+12% 移速)',
+        waves: 15,
+        gridPaths: [
+          [[0, 1], [8, 1], [8, 7], [14, 7], [14, 4], [17, 4]],
+          [[0, 8], [4, 8], [4, 4], [12, 4], [12, 1], [16, 1], [16, 4], [17, 4]]
+        ],
+        hotspots: [],
+        astralDais: [[6, 3], [10, 5]],
+        blockedTiles: [], cursedAltars: [],
+        props: [
+          { col: 6, row: 3, kind: 'crystal', hp: 660, reward: 135 },
+          { col: 10, row: 5, kind: 'crystal', hp: 660, reward: 135 },
+          { col: 2, row: 5, kind: 'inkwell', hp: 560, reward: 115 },
+          { col: 13, row: 2, kind: 'waxblock', hp: 680, reward: 140 },
+          { col: 10, row: 8, kind: 'inkwell', hp: 590, reward: 120 }
+        ]
+      },
+      {
+        theme: 'forbidden',
+        nameZh: '禁忌法典：賢者雙重試煉',
+        descZh: '20 波終極決戰｜焦灼雙線完全分流直指雙賢者之石！搶佔中央禁忌祭壇兼顧上下雙路。',
+        mechanicBadgeZh: '🔥 禁忌祭壇 (+25% 傷害，造價/升級/超頻 +30%)｜⛔ 腐蝕黑墨池 (不可建塔)',
+        waves: 20,
+        gridPaths: [
+          [[0, 1], [3, 1], [3, 3], [10, 3], [10, 1], [14, 1], [14, 2], [17, 2]],
+          [[0, 8], [6, 8], [6, 6], [13, 6], [13, 8], [16, 8], [16, 7], [17, 7]]
+        ],
+        hotspots: [], astralDais: [],
+        blockedTiles: [[2, 4], [4, 5], [11, 4], [14, 5]],
+        cursedAltars: [[7, 4], [9, 5]],
+        props: [
+          { col: 5, row: 2, kind: 'crystal', hp: 700, reward: 140 },
+          { col: 8, row: 4, kind: 'waxblock', hp: 660, reward: 130 },
+          { col: 8, row: 7, kind: 'inkwell', hp: 740, reward: 145 },
+          { col: 12, row: 2, kind: 'crystal', hp: 720, reward: 140 },
+          { col: 15, row: 5, kind: 'waxblock', hp: 680, reward: 135 }
+        ]
+      }
+    ];
+
+    const MAPS = RAW_MAPS.map(m => {
+      const paths = m.gridPaths.map(route => route.map(([c, r]) => tileCenter(c, r)));
+      const segRemaining = paths.map(route => {
+        const rem = new Array(route.length).fill(0);
+        for (let i = route.length - 2; i >= 0; i--) {
+          rem[i] = rem[i + 1] + Math.hypot(route[i + 1].x - route[i].x, route[i + 1].y - route[i].y);
+        }
+        return rem;
+      });
+      const pathTiles = buildPathTileSet(m.gridPaths);
+      const portalTiles = new Set(m.gridPaths.map(r => tileKey(r[0][0], r[0][1])));
+      const endTiles = new Set(m.gridPaths.map(r => tileKey(r[r.length - 1][0], r[r.length - 1][1])));
+      const portalPoints = Array.from(portalTiles).map(k => { const [c, r] = k.split(',').map(Number); return tileCenter(c, r); });
+      const endPoints = Array.from(endTiles).map(k => { const [c, r] = k.split(',').map(Number); return tileCenter(c, r); });
+      return {
+        ...m, paths, segRemaining, pathTiles, portalTiles, endTiles, portalPoints, endPoints,
+        hotspotTiles: new Set((m.hotspots || []).map(([c, r]) => tileKey(c, r))),
+        astralDaisTiles: new Set((m.astralDais || []).map(([c, r]) => tileKey(c, r))),
+        blockedTileSet: new Set((m.blockedTiles || []).map(([c, r]) => tileKey(c, r))),
+        cursedAltarTiles: new Set((m.cursedAltars || []).map(([c, r]) => tileKey(c, r)))
+      };
+    });
+
+    const TOWER_DEFS = [
+      {
+        id: 0, nameZh: '發條鋼筆弩',
+        roleZh: '對地+對空 (+50%對空)｜黑墨水封鎖回血',
+        cost: 60, range: 175, dmg: 32, rate: 0.52, air: true, color: '#e6a945',
+        lv2Cost: 65, lv3Cost: 115,
+        branchAZh: '皇家花體狙擊', branchADescZh: '超遠射程 + 2.4x 暴擊倍率，永久削弱敵人護甲',
+        branchBZh: '連發速寫機括', branchBDescZh: '雙管極速連射，每 4 發觸發墨水爆裂濺射'
+      },
+      {
+        id: 1, nameZh: '封蠟與水銀儀',
+        roleZh: '控場減速｜水銀浸潤可觸發沸騰真傷',
+        cost: 70, range: 135, dmg: 16, rate: 1.0, air: false, color: '#58c9b0',
+        lv2Cost: 70, lv3Cost: 120,
+        branchAZh: '皇家火漆印章', branchADescZh: '重砸地面定身 1.3 秒並附加 25% 脆弱增傷',
+        branchBZh: '極寒水銀漏斗', branchBDescZh: '大範圍減速 55% 並每秒扣除最大生命 2.5% 真傷'
+      },
+      {
+        id: 2, nameZh: '稜鏡聚光儀',
+        roleZh: '對地+對空｜直線貫穿光束，雙倍破盾',
+        cost: 90, range: 210, dmg: 27, rate: 0.32, air: true, color: '#b388ff',
+        lv2Cost: 85, lv3Cost: 140,
+        branchAZh: '太陽焦點巨鏡', branchADescZh: '持續鎖定同一目標時傷害最高遞增至 280%',
+        branchBZh: '分光色散稜鏡', branchBDescZh: '主光束命中後折射 3 道彩虹光束轟擊周圍敵人'
+      },
+      {
+        id: 3, nameZh: '紅蓮燒瓶臼砲',
+        roleZh: '預判拋物線群傷｜與黑墨共鳴觸發燃墨暴擊',
+        cost: 85, range: 205, dmg: 66, rate: 1.30, air: false, color: '#ef644c',
+        lv2Cost: 80, lv3Cost: 135,
+        branchAZh: '希臘火燃燒瓶', branchADescZh: '落點留下持續 4.5 秒的翠綠鍊金火海灼燒敵群',
+        branchBZh: '連鎖反應觸媒', branchBDescZh: '擊殺敵人時引發二次屍爆，造成 22% 最大生命範圍傷'
+      }
+    ];
+
+    const FUSION_DEFS = {
+      '0-2': {
+        key: '0-2', nameZh: '星軌狙擊光弩', recipeZh: '鋼筆弩 + 稜鏡儀',
+        roleZh: '對地+對空 (+60%對空)｜超遠瞬發穿透光矢、雙倍破盾與黑墨禁療',
+        range: 310, dmg: 138, rate: 0.42, air: true, color: '#38bdf8'
+      },
+      '0-3': {
+        key: '0-3', nameZh: '燃墨爆裂連弩', recipeZh: '鋼筆弩 + 臼砲',
+        roleZh: '對地+對空｜高速預判爆裂矢，命中直接掛黑墨並觸發範圍燃墨爆破',
+        range: 245, dmg: 92, rate: 0.34, air: true, color: '#fb923c'
+      },
+      '0-1': {
+        key: '0-1', nameZh: '淬毒水銀機弩', recipeZh: '鋼筆弩 + 水銀儀',
+        roleZh: '對地+對空｜雙管極速水銀針，可使飛行與地面敵人同時浸潤緩速',
+        range: 225, dmg: 64, rate: 0.22, air: true, color: '#2dd4bf'
+      },
+      '1-2': {
+        key: '1-2', nameZh: '極光蒸餾巨塔', recipeZh: '水銀儀 + 稜鏡儀',
+        roleZh: '對地+對空｜周圍常駐水銀寒霧並同時折射 4 道光束，高頻自觸沸騰真傷',
+        range: 255, dmg: 76, rate: 0.30, air: true, color: '#c084fc'
+      },
+      '1-3': {
+        key: '1-3', nameZh: '煉獄熔汞重砲', recipeZh: '水銀儀 + 臼砲',
+        roleZh: '地面毀滅｜巨型高壓熔汞彈，範圍定身 1.2s、翠綠火海與沸騰真傷',
+        range: 265, dmg: 215, rate: 1.05, air: false, color: '#f43f5e'
+      },
+      '2-3': {
+        key: '2-3', nameZh: '日蝕焚天聚光爐', recipeZh: '稜鏡儀 + 臼砲',
+        roleZh: '對地+對空｜引導軌道光柱轟擊目標區，瞬間清空範圍護盾並巨額灼燒',
+        range: 270, dmg: 155, rate: 0.62, air: true, color: '#facc15'
+      }
+    };
+
+    function getFusionKey(typeA, typeB) {
+      return typeA < typeB ? `${typeA}-${typeB}` : `${typeB}-${typeA}`;
+    }
+
+    const TALENT_DEFS = [
+      { key: 'gold', nameZh: '鍊金起手金袋', descZh: '每級初始金幣 +25', cost: 8, max: 5 },
+      { key: 'stone', nameZh: '賢者之石加固', descZh: '每級初始石心生命 +4', cost: 8, max: 5 },
+      { key: 'haste', nameZh: '精密發條潤滑', descZh: '所有器械攻擊速度 +6%', cost: 10, max: 5 },
+      { key: 'crit', nameZh: '高純度火藥觸媒', descZh: '所有器械基礎暴擊率 +5%', cost: 10, max: 5 },
+      { key: 'greed', nameZh: '秘銀蒸餾萃取', descZh: '擊殺與過波賞金、結晶 +10%', cost: 12, max: 5 }
+    ];
+
+    const state = {
+      difficulty: 1, mapIndex: 0, wave: 0, maxWaves: 12,
+      endless: false, autoWave: false, life: 15, maxLife: 15,
+      gold: 185, aether: 30, runAetherEarned: 0, speed: 1, paused: false,
+      waveActive: false, time: 0, shake: 0,
+      hoverTile: null, selectedTowerId: -1, selectedTrapId: -1,
+      pendingBuildTile: null, quickBuild: null, fusionSourceId: -1,
+      priorityPropId: -1, aimingSpell: -1, chronoTimer: 0,
+      spells: [{ cd: 0, maxCd: 22 }, { cd: 0, maxCd: 26 }],
+      talents: { gold: 0, stone: 0, haste: 0, crit: 0, greed: 0 },
+      bestStars: [0, 0, 0], goldenTiles: new Set(),
+      routeTraps: [], props: [], towers: [], enemies: [],
+      projectiles: [], beams: [], fireZones: [], shockwaves: [],
+      particles: [], floaters: [], spawnQueue: [], nextId: 1
+    };
+
+    function loadProgress() {
+      try {
+        const raw = JSON.parse(localStorage.getItem('alchemist_desk_grand_v6') || '{}');
+        if (typeof raw.aether === 'number') state.aether = raw.aether;
+        if (typeof raw.difficulty === 'number') state.difficulty = raw.difficulty;
+        if (Array.isArray(raw.bestStars)) state.bestStars = raw.bestStars;
+        if (raw.talents) Object.assign(state.talents, raw.talents);
+        if (typeof raw.masterVol === 'number') audio.masterVol = raw.masterVol;
+        if (typeof raw.musicVol === 'number') audio.musicVol = raw.musicVol;
+        if (typeof raw.sfxVol === 'number') audio.sfxVol = raw.sfxVol;
+      } catch (e) {}
+    }
+
+    function saveProgress() {
+      try {
+        localStorage.setItem('alchemist_desk_grand_v6', JSON.stringify({
+          aether: state.aether, difficulty: state.difficulty, bestStars: state.bestStars,
+          talents: state.talents, masterVol: audio.masterVol, musicVol: audio.musicVol, sfxVol: audio.sfxVol
+        }));
+      } catch (e) {}
+    }
+
+    function showBanner(msg, dur = 3400) {
+      const el = document.getElementById('warning-banner');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => el.classList.add('hidden'), dur);
+    }
+
+    function getBuildCost(type, isCursedAltar = false) {
+      return isCursedAltar ? Math.round(TOWER_DEFS[type].cost * 1.3) : TOWER_DEFS[type].cost;
+    }
+
+    function getUpgradeCost(t) {
+      const def = TOWER_DEFS[t.type];
+      const base = t.level === 1 ? def.lv2Cost : def.lv3Cost;
+      return t.isCursedAltar ? Math.round(base * 1.3) : base;
+    }
+
+    function getFusionCost(mainTower) {
+      return mainTower && mainTower.isCursedAltar ? 104 : 80;
+    }
+
+    function getOverclockCost(t) {
+      const oc = t.overclock || 0;
+      return Math.round(140 * Math.pow(1.45, oc) * (t.isCursedAltar ? 1.3 : 1));
+    }
+
+    function getEligibleFusionPartners(mainTower) {
+      if (!mainTower || mainTower.level !== 3) return [];
+      return state.towers.filter(other =>
+        other.id !== mainTower.id &&
+        other.level === 3 &&
+        other.type !== mainTower.type &&
+        Math.abs(other.col - mainTower.col) + Math.abs(other.row - mainTower.row) === 1
+      );
+    }
+
+    function getTerrainBonusLabel(isGolden, isAstralDais, isCursedAltar) {
+      const parts = [];
+      if (isGolden) parts.push('★黃金符文 (+15% 攻/射程)');
+      if (isAstralDais) parts.push('✨星象高台 (+20% 射程)');
+      if (isCursedAltar) parts.push('🔥禁忌祭壇 (+25% 傷害 / 費+30%)');
+      return parts.join(' · ');
+    }
+
+    function getTowerStats(t) {
+      const goldMult = t.isGolden ? 1.15 : 1.0;
+      const astralRange = t.isAstralDais ? 1.20 : 1.0;
+      const cursedDmg = t.isCursedAltar ? 1.25 : 1.0;
+      const hasteMult = (1 + state.talents.haste * 0.06) * (state.chronoTimer > 0 ? 1.35 : 1.0);
+      const oc = t.overclock || 0;
+      const ocDmgMult = 1 + oc * 0.15;
+      const ocRangeBonus = Math.min(60, oc * 4);
+
+      if (t.level === 4 && t.fusionKey && FUSION_DEFS[t.fusionKey]) {
+        const f = FUSION_DEFS[t.fusionKey];
+        return {
+          range: (f.range + ocRangeBonus) * goldMult * astralRange,
+          dmg: f.dmg * goldMult * cursedDmg * ocDmgMult,
+          rate: f.rate / hasteMult,
+          air: f.air,
+          color: f.color
+        };
+      }
+
+      const base = TOWER_DEFS[t.type];
+      const range = (base.range + (t.level - 1) * 24 + (t.level === 3 && t.branch === 0 ? 32 : 0) + ocRangeBonus) * goldMult * astralRange;
+      const dmg = (base.dmg * (1 + (t.level - 1) * 0.48) * (t.level === 3 && t.branch === 0 ? 1.35 : 1.15)) * goldMult * cursedDmg * ocDmgMult;
+      let rate = base.rate / hasteMult;
+      if (t.type === 0 && t.level === 3 && t.branch === 1) rate *= 0.48;
+      return { range, dmg, rate, air: base.air, color: base.color };
+    }
+
+    function getEnemyRemainingDist(e) {
+      const map = MAPS[state.mapIndex];
+      const route = map.paths[e.pathIndex];
+      if (e.seg >= route.length - 1) return 0;
+      const nextPt = route[e.seg + 1];
+      return map.segRemaining[e.pathIndex][e.seg + 1] + Math.hypot(nextPt.x - e.x, nextPt.y - e.y);
+    }
+
+    function predictEnemyPos(e, leadSec) {
+      if (!e || e.stunTimer > 0) return { x: e.x, y: e.y };
+      const map = MAPS[state.mapIndex];
+      const route = map.paths[e.pathIndex];
+      const slowMult = e.slowTimer > 0 ? (1 - Math.min(0.7, e.slowFactor)) : 1.0;
+      const chronoMult = state.chronoTimer > 0 ? 0.25 : 1.0;
+      let dist = e.speed * slowMult * chronoMult * leadSec;
+      let px = e.x, py = e.y, seg = e.seg;
+      while (dist > 0 && seg < route.length - 1) {
+        const nxt = route[seg + 1];
+        const d = Math.hypot(nxt.x - px, nxt.y - py);
+        if (d <= dist) { px = nxt.x; py = nxt.y; seg++; dist -= d; }
+        else { const a = Math.atan2(nxt.y - py, nxt.x - px); px += Math.cos(a) * dist; py += Math.sin(a) * dist; dist = 0; }
+      }
+      return { x: px, y: py };
+    }
+
+    // ==================== 5. GRID TILE EVALUATION ====================
+    function evaluateTile(col, row) {
+      const map = MAPS[state.mapIndex];
+      const k = tileKey(col, row);
+      const existingTower = state.towers.find(t => t.col === col && t.row === row);
+      if (existingTower) return { validTower: false, validTrap: false, existingTower, reason: '此格已有魔導器械' };
+
+      const existingTrap = state.routeTraps.find(tr => tr.col === col && tr.row === row);
+      if (existingTrap) return { validTower: false, validTrap: false, existingTrap, reason: '此格已鋪設路線陷阱' };
+
+      const existingProp = state.props.find(p => p.col === col && p.row === row);
+      if (existingProp) {
+        const underAstral = map.astralDaisTiles.has(k);
+        return {
+          validTower: false, validTrap: false, existingProp, isAstralDais: underAstral,
+          reason: underAstral ? '下方隱藏【✨星象高台 (+20% 射程)】！點擊強制集火拆除' : '書桌障礙物（點擊強制集火拆除）'
+        };
+      }
+
+      if (map.portalTiles.has(k)) return { validTower: false, validTrap: false, reason: '魔物湧出裂隙格' };
+      if (map.endTiles.has(k)) return { validTower: false, validTrap: false, reason: '賢者之石祭壇格' };
+      if (map.blockedTileSet.has(k)) return { validTower: false, validTrap: false, isBlocked: true, reason: '⛔ 腐蝕黑墨池（不可建造）' };
+
+      if (map.pathTiles.has(k)) {
+        return {
+          validTower: false, validTrap: true, onPath: true, isHotspot: map.hotspotTiles.has(k),
+          reason: map.hotspotTiles.has(k) ? '🔥 蒸餾高熱節點｜可鋪設路線陷阱' : '水銀軌道格｜可鋪設路線陷阱'
+        };
+      }
+
+      return {
+        validTower: true, validTrap: false,
+        isGolden: state.goldenTiles.has(k),
+        isAstralDais: map.astralDaisTiles.has(k),
+        isCursedAltar: map.cursedAltarTiles.has(k),
+        reason: '可自由建造魔導器械'
+      };
+    }
+
+    // ==================== 6. WAVE GENERATION & HUD ====================
+    function buildWavePlan(w) {
+      const plan = [];
+      const routes = MAPS[state.mapIndex].paths.length;
+      const count = 9 + state.difficulty * 3 + Math.min(w, 25) * 3 + state.mapIndex * 2;
+      for (let i = 0; i < count; i++) {
+        let kind = 'paper';
+        if (w >= 1 && i % 5 === 2) kind = 'golem';
+        if (w >= 1 && i % 4 === 3) kind = 'slime';
+        if (w >= 2 && i % 4 === 1) kind = 'moth';
+        if (w >= 2 && i % 5 === 4) kind = 'shield';
+        if (w >= 3 && i % 6 === 0 && i > 0) kind = 'phantom';
+        const isBurst = (w >= 3 && i % 7 === 0);
+        plan.push({
+          kind,
+          delay: i === 0 ? 0.15 : isBurst ? 0.14 : Math.max(0.18, 0.56 - Math.min(w, 16) * 0.022 - state.difficulty * 0.04),
+          pathIndex: i % routes
+        });
+      }
+      if ((w + 1) % 4 === 0 || w === 5 || (state.difficulty === 2 && w === 2)) {
+        plan.push({ kind: 'beetle', delay: 0.9, pathIndex: w % routes });
+        if (w >= 8 || state.difficulty === 2) plan.push({ kind: 'beetle', delay: 1.3, pathIndex: (w + 1) % routes });
+      }
+      if (w === state.maxWaves - 1 || (state.difficulty >= 1 && w === 10) || (state.endless && (w + 1) % 5 === 0)) {
+        plan.push({ kind: 'boss', delay: 1.2, pathIndex: 0 });
+        if (state.difficulty === 2 && w >= 10) plan.push({ kind: 'boss', delay: 2.2, pathIndex: routes - 1 });
+      }
+      return plan;
+    }
+
+    function updateWavePreview() {
+      const titleEl = document.getElementById('wave-preview-title');
+      const totalEl = document.getElementById('wave-preview-total');
+      const badgesEl = document.getElementById('wave-preview-badges');
+      if (!titleEl || !totalEl || !badgesEl) return;
+
+      const isFinalActive = state.waveActive && !state.endless && state.wave + 1 >= state.maxWaves;
+      if (isFinalActive) {
+        titleEl.textContent = '最終波次交戰中';
+        totalEl.textContent = '';
+        badgesEl.innerHTML = '<span class="px-2 py-0.5 rounded-md border text-sm font-bold bg-rose-950/90 border-rose-400/80 text-rose-200">⚔️ 守住賢者之石！</span>';
+        return;
+      }
+
+      const previewWaveIdx = state.waveActive ? state.wave + 1 : state.wave;
+      const plan = buildWavePlan(previewWaveIdx);
+      const counts = { total: plan.length, golem: 0, moth: 0, slime: 0, shield: 0, phantom: 0, beetle: 0, boss: 0 };
+      plan.forEach(item => { if (counts[item.kind] !== undefined) counts[item.kind]++; });
+      const badges = [];
+      if (counts.boss > 0 || counts.beetle > 0) badges.push({ icon: '👑', label: '領主', count: counts.boss + counts.beetle, cls: 'bg-rose-950/90 border-rose-400/80 text-rose-200' });
+      if (counts.moth > 0) badges.push({ icon: '🦋', label: '飛行', count: counts.moth, cls: 'bg-amber-950/90 border-amber-400/80 text-amber-200' });
+      if (counts.shield > 0) badges.push({ icon: '🛡️', label: '護盾', count: counts.shield, cls: 'bg-sky-950/90 border-sky-400/80 text-sky-200' });
+      if (counts.golem > 0) badges.push({ icon: '🪨', label: '高甲', count: counts.golem, cls: 'bg-stone-800/90 border-stone-400/80 text-stone-200' });
+      if (counts.slime > 0) badges.push({ icon: '💧', label: '分裂', count: counts.slime, cls: 'bg-emerald-950/90 border-emerald-400/80 text-emerald-200' });
+      if (counts.phantom > 0) badges.push({ icon: '👻', label: '幽影', count: counts.phantom, cls: 'bg-purple-950/90 border-purple-400/80 text-purple-200' });
+
+      titleEl.textContent = state.waveActive ? `下波預告 W${previewWaveIdx + 1}` : `第 ${previewWaveIdx + 1} 波預告`;
+      totalEl.textContent = `共 ${counts.total} 隻`;
+      badgesEl.innerHTML = badges.length === 0
+        ? '<span class="px-2 py-0.5 rounded-md border text-sm font-bold bg-amber-950/80 border-amber-500/60 text-amber-100">📜 紙偶輕兵</span>'
+        : badges.map(b => `<span class="px-2 py-0.5 rounded-md border text-sm font-bold ${b.cls}">${b.icon}${b.label}×${b.count}</span>`).join('');
+    }
+
+    function updateModeDockUI() {
+      const cancelPill = document.getElementById('mode-cancel-pill');
+      if (cancelPill) {
+        if (state.fusionSourceId >= 0) {
+          cancelPill.textContent = '⚗️ 請點擊高亮的相鄰 Lv.3 副塔進行合成（ESC / 右鍵取消）';
+          cancelPill.classList.remove('hidden');
+        } else if (state.quickBuild) {
+          cancelPill.textContent = '✕ 取消連續建造 [ESC / 右鍵]';
+          cancelPill.classList.remove('hidden');
+        } else {
+          cancelPill.classList.add('hidden');
+        }
+      }
+
+      document.querySelectorAll('.qbuild-btn').forEach(btn => {
+        const isTower = btn.dataset.qmode === 'tower';
+        const id = isTower ? parseInt(btn.dataset.qid, 10) : -1;
+        const kind = btn.dataset.qkind || '';
+        const baseCost = isTower ? TOWER_DEFS[id].cost : parseInt(btn.dataset.qcost, 10);
+        const isActive = state.quickBuild && (
+          (isTower && state.quickBuild.mode === 'tower' && state.quickBuild.type === id) ||
+          (!isTower && state.quickBuild.mode === 'trap' && state.quickBuild.kind === kind)
+        );
+        btn.classList.toggle('ring-2', !!isActive);
+        btn.classList.toggle('ring-amber-300', !!isActive);
+        btn.classList.toggle('brightness-125', !!isActive);
+        const costEl = btn.querySelector('.qbuild-cost');
+        if (costEl) {
+          costEl.textContent = `🪙 ${baseCost}`;
+          costEl.classList.toggle('text-rose-400', state.gold < baseCost);
+          costEl.classList.toggle('text-amber-300', state.gold >= baseCost);
+        }
+      });
+    }
+
+    function setQuickBuild(selection) {
+      const same = state.quickBuild && selection && (
+        (selection.mode === 'tower' && state.quickBuild.mode === 'tower' && state.quickBuild.type === selection.type) ||
+        (selection.mode === 'trap' && state.quickBuild.mode === 'trap' && state.quickBuild.kind === selection.kind)
+      );
+      if (same || !selection) { clearQuickBuild(); return; }
+      closeFloatingMenu();
+      state.fusionSourceId = -1;
+      state.aimingSpell = -1;
+      state.quickBuild = selection;
+      updateModeDockUI();
+      updateHUD();
+    }
+
+    function clearQuickBuild() {
+      state.quickBuild = null;
+      updateModeDockUI();
+    }
+
+    function updateHUD() {
+      const map = MAPS[state.mapIndex];
+      document.getElementById('ui-diff-badge').textContent = ['學徒', '大賢者', '煉獄'][state.difficulty] || '大賢者';
+      document.getElementById('ui-map-subtitle').textContent = map.nameZh;
+      document.getElementById('val-life').textContent = `${state.life}/${state.maxLife}`;
+      document.getElementById('val-gold').textContent = state.gold;
+      document.getElementById('val-wave').textContent = state.endless
+        ? `${state.wave + 1}/∞`
+        : `${Math.min(state.wave + 1, state.maxWaves)}/${state.maxWaves}`;
+      document.getElementById('val-aether').textContent = state.aether;
+
+      const s0 = state.spells[0], s1 = state.spells[1];
+      document.getElementById('spell-0-status').textContent = s0.cd > 0
+        ? `冷卻中 (${Math.ceil(s0.cd)}s)`
+        : state.aimingSpell === 0 ? '🎯 請點擊目標區域...' : '就緒 (破盾+定身3s)';
+      document.getElementById('spell-1-status').textContent = s1.cd > 0
+        ? `冷卻中 (${Math.ceil(s1.cd)}s)`
+        : state.chronoTimer > 0 ? `⏳ 凝滯中 (${state.chronoTimer.toFixed(1)}s)` : '就緒 (緩速+加速塔)';
+
+      const waveBtn = document.getElementById('btn-next-wave');
+      const waveLbl = document.getElementById('lbl-send-wave');
+      if (state.waveActive) {
+        waveBtn.disabled = true;
+        waveBtn.classList.remove('pulse-ring');
+        waveLbl.textContent = `第 ${state.wave + 1} 波交戰中...`;
+      } else {
+        waveBtn.disabled = false;
+        waveBtn.classList.add('pulse-ring');
+        waveLbl.textContent = `開始第 ${state.wave + 1} 波 (Space)`;
+      }
+      updateWavePreview();
+      updateModeDockUI();
+    }
+
+    function startMap(idx, forceEndless = null) {
+      audio.init();
+      state.mapIndex = idx;
+      if (forceEndless !== null) {
+        state.endless = forceEndless;
+        document.getElementById('chk-endless').checked = forceEndless;
+      } else {
+        state.endless = document.getElementById('chk-endless').checked;
+      }
+      state.maxWaves = MAPS[idx].waves;
+      state.wave = 0;
+      state.maxLife = ([20, 15, 10][state.difficulty] || 15) + state.talents.stone * 4;
+      state.life = state.maxLife;
+      state.gold = ([235, 185, 160][state.difficulty] || 185) + state.talents.gold * 25;
+      state.runAetherEarned = 0;
+      state.waveActive = false;
+      state.paused = false;
+      state.selectedTowerId = -1;
+      state.selectedTrapId = -1;
+      state.pendingBuildTile = null;
+      state.quickBuild = null;
+      state.fusionSourceId = -1;
+      state.priorityPropId = -1;
+      state.aimingSpell = -1;
+      state.chronoTimer = 0;
+      state.spells[0].cd = 0;
+      state.spells[1].cd = 0;
+      state.goldenTiles = new Set();
+      state.routeTraps = [];
+      state.towers = [];
+      state.enemies = [];
+      state.projectiles = [];
+      state.beams = [];
+      state.fireZones = [];
+      state.shockwaves = [];
+      state.particles = [];
+      state.floaters = [];
+      state.spawnQueue = [];
+
+      const propMult = [1.0, 1.35, 1.75][state.difficulty] || 1.35;
+      state.props = (MAPS[idx].props || []).map((p, i) => {
+        const pos = tileCenter(p.col, p.row);
+        const hp = Math.round(p.hp * propMult);
+        return { id: 900 + i, col: p.col, row: p.row, x: pos.x, y: pos.y, kind: p.kind, hp, maxHp: hp, reward: p.reward, hitFlash: 0 };
+      });
+
+      document.getElementById('modal-title').classList.add('hidden');
+      document.getElementById('modal-result').classList.add('hidden');
+      closeFloatingMenu();
+      updateHUD();
+      showBanner(`📜 ${MAPS[idx].nameZh}｜${MAPS[idx].mechanicBadgeZh}`, 4200);
+    }
+
+    function sendNextWave() {
+      audio.init();
+      if (state.waveActive) return;
+      state.waveActive = true;
+      state.spawnQueue = buildWavePlan(state.wave);
+      const hasBoss = state.spawnQueue.some(s => s.kind === 'boss' || s.kind === 'beetle');
+      const hasFlyer = state.spawnQueue.some(s => s.kind === 'moth');
+      if (hasBoss) showBanner('👑 禁忌魔導領主降臨！每 6 秒施放【🛡️奧術護盾脈衝】，善用稜鏡、火漆隕落或 Lv.4 合成塔壓制！');
+      else if (hasFlyer) showBanner('🦋 飛行魔物「折紙星蛾」來襲！發條鋼筆弩具備 +50% 對空特攻，亦可與稜鏡／水銀／臼砲合成防空巨塔！');
+      audio.playBuild();
+      updateHUD();
+    }
+
+    function spawnEnemy(kind, pathIndex, customPos = null, customSeg = 0) {
+      const diffHp = [1.0, 1.45, 2.0][state.difficulty] || 1.45;
+      const diffSpd = [1.0, 1.1, 1.2][state.difficulty] || 1.1;
+      const waveFactor = state.wave < 15
+        ? Math.pow(1.12, state.wave)
+        : Math.pow(1.12, 14) * (1 + (state.wave - 14) * 0.22);
+      const scale = (1 + Math.min(state.wave, 15) * 0.18 + state.mapIndex * 0.16) * waveFactor * diffHp;
+
+      // Balanced Origami Moth: base HP 95, armor 0
+      const defs = {
+        paper:   { hp: 58 * scale, speed: 112 * diffSpd, reward: 8, armor: 0, flying: false, split: false, shield: 0, regen: 0, r: 13 },
+        golem:   { hp: 360 * scale, speed: 48 * diffSpd, reward: 20, armor: 0.56, flying: false, split: false, shield: 0, regen: 0, r: 19 },
+        moth:    { hp: 95 * scale, speed: 92 * diffSpd, reward: 14, armor: 0, flying: true, split: false, shield: 0, regen: 0, r: 15 },
+        slime:   { hp: 210 * scale, speed: 66 * diffSpd, reward: 16, armor: 0.15, flying: false, split: true, shield: 0, regen: 0.036, r: 16 },
+        shield:  { hp: 255 * scale, speed: 62 * diffSpd, reward: 19, armor: 0.28, flying: false, split: false, shield: 4 + state.difficulty, regen: 0, r: 17 },
+        phantom: { hp: 175 * scale, speed: 100 * diffSpd, reward: 17, armor: 0.10, flying: false, split: false, shield: 1, regen: 0.024, r: 14 },
+        drop:    { hp: 52 * scale, speed: 136 * diffSpd, reward: 4, armor: 0, flying: false, split: false, shield: 0, regen: 0, r: 10 },
+        beetle:  { hp: 1680 * scale, speed: 40 * diffSpd, reward: 55, armor: 0.46, flying: false, split: false, shield: 5 + state.difficulty * 2, regen: 0.015, r: 23 },
+        boss:    { hp: 3500 * scale, speed: 33 * diffSpd, reward: 115, armor: 0.44, flying: false, split: false, shield: 7 + state.difficulty * 2, regen: 0.018, r: 26 }
+      };
+      const d = defs[kind] || defs.paper;
+      const route = MAPS[state.mapIndex].paths[pathIndex % MAPS[state.mapIndex].paths.length];
+      const pt = customPos || { x: route[0].x, y: route[0].y };
+
+      const enemy = {
+        id: state.nextId++, kind, pathIndex: pathIndex % MAPS[state.mapIndex].paths.length,
+        seg: customSeg, x: pt.x, y: pt.y, hp: d.hp, maxHp: d.hp, hpDisplay: d.hp,
+        speed: d.speed, reward: d.reward, armor: d.armor, flying: d.flying, split: d.split,
+        shieldHits: d.shield, regenRate: d.regen, auraTimer: 3.5, pulseTimer: 6.0,
+        hasteTimer: 0, inkTimer: 0, mercuryTimer: 0, slowTimer: 0, slowFactor: 0,
+        stunTimer: 0, vulnTimer: 0, overheatTimer: 0, boilCd: 0, hitFlash: 0,
+        remainingDist: 0, r: d.r, walkPhase: Math.random() * Math.PI * 2
+      };
+      enemy.remainingDist = getEnemyRemainingDist(enemy);
+      state.enemies.push(enemy);
+    }
+
+    function damageEnemy(e, rawDmg, sourceType, isTrue = false, isCrit = false, sourceTower = null, allowBoil = true) {
+      if (!e || e.hp <= 0) return;
+
+      if (e.shieldHits > 0) {
+        e.shieldHits = Math.max(0, e.shieldHits - (sourceType === 2 ? 2 : 1));
+        state.floaters.push({ x: e.x, y: e.y - 24, text: '🛡️破盾!', crit: false, color: '#7ce8ff', ttl: 0.6 });
+        spawnParticles(e.x, e.y, '#7ce8ff', 5);
+        return;
+      }
+
+      let dmg = rawDmg;
+      if (!isTrue && e.armor > 0) {
+        const effArmor = sourceType === 2 ? e.armor * 0.35 : e.armor;
+        dmg *= (1 - effArmor);
+      }
+      if (e.vulnTimer > 0) dmg *= 1.25;
+      if (e.overheatTimer > 0 && (sourceType === 1 || sourceType === 2 || sourceType === 3)) dmg *= 1.25;
+
+      // Clockwork Nib +50% anti-air passive
+      if (sourceType === 0 && e.flying) dmg *= 1.50;
+
+      // Boiling Steam Synergy
+      if (allowBoil && (sourceType === 2 || sourceType === 3) && e.mercuryTimer > 0 && e.boilCd <= 0) {
+        e.boilCd = 0.9;
+        const boilDmg = dmg * 0.65 + e.maxHp * 0.04;
+        dmg += boilDmg;
+        state.shockwaves.push({ x: e.x, y: e.y, r: 6, maxR: 55, ttl: 0.28, color: '#80ffea' });
+        state.floaters.push({ x: e.x, y: e.y - 36, text: `💥沸騰 +${Math.round(boilDmg)}`, crit: true, color: '#80ffea', ttl: 0.8 });
+      }
+
+      // Blazing Ink Synergy
+      if (sourceType === 3 && e.inkTimer > 0) {
+        dmg *= 1.65;
+        isCrit = true;
+        state.floaters.push({ x: e.x, y: e.y - 36, text: '🔥燃墨烈焰!', crit: true, color: '#ff9e44', ttl: 0.8 });
+      }
+
+      if (sourceType === 0) e.inkTimer = 4.5;
+
+      const applied = Math.min(e.hp, dmg);
+      e.hp -= dmg;
+      if (sourceTower) sourceTower.totalDamage = (sourceTower.totalDamage || 0) + applied;
+      e.hitFlash = 0.12;
+      state.floaters.push({
+        x: e.x + (Math.random() - 0.5) * 14, y: e.y - 20,
+        text: `${Math.round(dmg)}${isCrit ? '!' : ''}`, crit: isCrit,
+        color: isCrit ? '#ffe066' : '#fff4d6', ttl: 0.68
+      });
+
+      if (e.hp <= 0) killEnemy(e);
+    }
+
+    function killEnemy(e) {
+      const idx = state.enemies.indexOf(e);
+      if (idx === -1) return;
+      state.enemies.splice(idx, 1);
+
+      const greedMult = 1 + state.talents.greed * 0.10;
+      state.gold += Math.round(e.reward * greedMult);
+      spawnParticles(e.x, e.y, e.kind === 'slime' ? '#68e0b8' : '#f5d478', 14);
+
+      if (e.split) {
+        for (let s = 0; s < 2; s++) spawnEnemy('drop', e.pathIndex, { x: e.x + (s === 0 ? -10 : 10), y: e.y }, e.seg);
+      }
+
+      const chainTower = state.towers.find(t => t.type === 3 && t.level === 3 && t.branch === 1);
+      if (chainTower) {
+        state.shockwaves.push({ x: e.x, y: e.y, r: 8, maxR: 72, ttl: 0.3, color: '#ff6b4a' });
+        const blastDmg = e.maxHp * 0.22;
+        state.enemies.slice().forEach(other => {
+          if (!other.flying && Math.hypot(other.x - e.x, other.y - e.y) <= 72) {
+            damageEnemy(other, blastDmg, 3, true, true, chainTower);
+          }
+        });
+      }
+      updateHUD();
+      if (state.selectedTowerId >= 0 || state.pendingBuildTile) refreshFloatingMenu();
+    }
+
+    function damageProp(prop, dmg, sourceTower = null) {
+      if (!prop) return;
+      const applied = Math.min(prop.hp, dmg);
+      prop.hp -= dmg;
+      if (sourceTower) sourceTower.totalDamage = (sourceTower.totalDamage || 0) + applied;
+      prop.hitFlash = 0.12;
+      state.floaters.push({ x: prop.x, y: prop.y - 22, text: `-${Math.round(dmg)}`, crit: false, color: '#ffd166', ttl: 0.5 });
+      if (prop.hp <= 0) {
+        const idx = state.props.indexOf(prop);
+        if (idx !== -1) state.props.splice(idx, 1);
+        state.gold += prop.reward;
+        const k = tileKey(prop.col, prop.row);
+        state.goldenTiles.add(k);
+        if (state.priorityPropId === prop.id) state.priorityPropId = -1;
+        spawnParticles(prop.x, prop.y, '#ffe066', 24);
+        state.shockwaves.push({ x: prop.x, y: prop.y, r: 8, maxR: 68, ttl: 0.35, color: '#ffe066' });
+        const hasAstral = MAPS[state.mapIndex].astralDaisTiles.has(k);
+        showBanner(hasAstral
+          ? '✨ 擊碎星象水晶！獲得賞金並解鎖【✨星象高台 (+20% 射程) ＋ ★黃金符文 (+15% 全能)】！'
+          : '✨ 擊碎書桌障礙物！獲得賞金並在該格留下【★黃金奧術符文 (+15% 傷害與射程)】！');
+        audio.playBlast();
+        updateHUD();
+      }
+    }
+
+    function finishRun(victory) {
+      state.paused = true;
+      state.waveActive = false;
+      const modal = document.getElementById('modal-result');
+      modal.classList.remove('hidden');
+      document.getElementById('res-icon').textContent = victory ? '🏆' : '💔';
+      document.getElementById('res-title').textContent = victory ? '手稿封印完成！' : '賢者之石碎裂...';
+      document.getElementById('res-subtitle').textContent = MAPS[state.mapIndex].nameZh;
+      document.getElementById('res-life').textContent = `${state.life} / ${state.maxLife}`;
+      document.getElementById('res-aether').textContent = `+${state.runAetherEarned} ✦`;
+      let stars = 0;
+      if (victory) {
+        stars = state.life >= state.maxLife ? 3 : state.life >= Math.ceil(state.maxLife * 0.5) ? 2 : 1;
+        state.bestStars[state.mapIndex] = Math.max(state.bestStars[state.mapIndex] || 0, stars);
+        saveProgress();
+      }
+      document.getElementById('res-stars').textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+      document.getElementById('btn-res-endless').style.display = victory ? 'inline-block' : 'none';
+    }
+
+    // ==================== 7. SIMULATION LOOP ====================
+    function simulateStep(dt) {
+      state.time += dt;
+      state.shake = Math.max(0, state.shake - dt * 22);
+      if (state.chronoTimer > 0) state.chronoTimer = Math.max(0, state.chronoTimer - dt);
+      state.spells.forEach(s => { if (s.cd > 0) s.cd = Math.max(0, s.cd - dt); });
+
+      if (state.waveActive && state.spawnQueue.length > 0) {
+        state.spawnQueue[0].delay -= dt;
+        while (state.spawnQueue.length > 0 && state.spawnQueue[0].delay <= 0) {
+          const item = state.spawnQueue.shift();
+          spawnEnemy(item.kind, item.pathIndex);
+        }
+      }
+
+      for (let i = state.fireZones.length - 1; i >= 0; i--) {
+        const z = state.fireZones[i];
+        z.ttl -= dt;
+        z.tick = (z.tick || 0) - dt;
+        if (z.tick <= 0) {
+          z.tick = 0.25;
+          const srcTower = state.towers.find(tw => tw.id === z.sourceTowerId) || null;
+          state.enemies.slice().forEach(e => {
+            if ((z.hitAir || !e.flying) && Math.hypot(e.x - z.x, e.y - z.y) <= z.r) {
+              damageEnemy(e, z.dmg, 3, false, false, srcTower, !!z.allowBoil);
+            }
+          });
+        }
+        if (z.ttl <= 0) state.fireZones.splice(i, 1);
+      }
+
+      state.props.forEach(p => { p.hitFlash = Math.max(0, p.hitFlash - dt); });
+      const curMap = MAPS[state.mapIndex];
+
+      for (let i = state.enemies.length - 1; i >= 0; i--) {
+        const e = state.enemies[i];
+        if (!e) continue;
+        e.walkPhase += dt * (e.speed * 0.11);
+        e.hitFlash = Math.max(0, e.hitFlash - dt);
+        e.slowTimer = Math.max(0, e.slowTimer - dt);
+        e.stunTimer = Math.max(0, e.stunTimer - dt);
+        e.vulnTimer = Math.max(0, e.vulnTimer - dt);
+        e.inkTimer = Math.max(0, e.inkTimer - dt);
+        e.mercuryTimer = Math.max(0, e.mercuryTimer - dt);
+        e.overheatTimer = Math.max(0, e.overheatTimer - dt);
+        e.hasteTimer = Math.max(0, e.hasteTimer - dt);
+        e.boilCd = Math.max(0, e.boilCd - dt);
+        e.hpDisplay += (e.hp - e.hpDisplay) * Math.min(1, dt * 12);
+
+        if (e.regenRate > 0 && e.inkTimer <= 0 && e.hp < e.maxHp) {
+          e.hp = Math.min(e.maxHp, e.hp + e.maxHp * e.regenRate * dt);
+        }
+
+        const eTile = worldToGrid(e.x, e.y);
+        if (eTile && curMap.hotspotTiles.has(tileKey(eTile.col, eTile.row))) {
+          e.overheatTimer = 4.0;
+        }
+
+        if (e.kind === 'shield') {
+          e.auraTimer -= dt;
+          if (e.auraTimer <= 0) {
+            e.auraTimer = 4.2;
+            state.shockwaves.push({ x: e.x, y: e.y, r: 6, maxR: 75, ttl: 0.28, color: '#7ce8ff' });
+            state.enemies.forEach(ally => {
+              if (Math.hypot(ally.x - e.x, ally.y - e.y) <= 75) ally.shieldHits = Math.min(6, ally.shieldHits + 1);
+            });
+          }
+        }
+
+        if (e.kind === 'boss' || e.kind === 'beetle') {
+          e.pulseTimer -= dt;
+          if (e.pulseTimer <= 0) {
+            e.pulseTimer = 6.0;
+            state.shockwaves.push({ x: e.x, y: e.y, r: 10, maxR: 180, ttl: 0.42, color: '#7ce8ff' });
+            spawnParticles(e.x, e.y, '#7ce8ff', 18);
+            state.floaters.push({ x: e.x, y: e.y - 34, text: '🛡️奧術護盾脈衝!', crit: true, color: '#7ce8ff', ttl: 1.0 });
+            audio.playStamp();
+            state.enemies.forEach(ally => {
+              if (Math.hypot(ally.x - e.x, ally.y - e.y) <= 180) {
+                ally.shieldHits = Math.min(8, ally.shieldHits + 1);
+                ally.hasteTimer = Math.max(ally.hasteTimer, 2.5);
+              }
+            });
+            if (e.kind === 'boss') {
+              spawnEnemy('paper', e.pathIndex, { x: e.x, y: e.y }, e.seg);
+              spawnEnemy('moth', e.pathIndex, { x: e.x, y: e.y }, e.seg);
+            }
+          }
+        }
+
+        if (e.stunTimer > 0) continue;
+
+        const berserk = (e.kind === 'golem' && e.hp < e.maxHp * 0.45) ? 1.45 : 1.0;
+        const pulseHaste = e.hasteTimer > 0 ? 1.25 : 1.0;
+        const spineSlopeSpeed = (curMap.theme === 'grimoire' && eTile && eTile.col === 8) ? 1.12 : 1.0;
+        const chronoMult = state.chronoTimer > 0 ? 0.25 : 1.0;
+        const slowMult = e.slowTimer > 0 ? (1 - Math.min(0.7, e.slowFactor)) : 1.0;
+        let moveDist = e.speed * berserk * pulseHaste * spineSlopeSpeed * slowMult * chronoMult * dt;
+
+        const route = curMap.paths[e.pathIndex];
+        while (moveDist > 0 && e.seg < route.length - 1) {
+          const nextPt = route[e.seg + 1];
+          const dist = Math.hypot(nextPt.x - e.x, nextPt.y - e.y);
+          if (dist <= moveDist) { e.x = nextPt.x; e.y = nextPt.y; e.seg++; moveDist -= dist; }
+          else { const ang = Math.atan2(nextPt.y - e.y, nextPt.x - e.x); e.x += Math.cos(ang) * moveDist; e.y += Math.sin(ang) * moveDist; moveDist = 0; }
+        }
+        e.remainingDist = getEnemyRemainingDist(e);
+
+        if (e.seg >= route.length - 1) {
+          const loss = e.kind === 'boss' ? 5 : e.kind === 'beetle' ? 3 : 1;
+          state.life = Math.max(0, state.life - loss);
+          state.shake = 8;
+          spawnParticles(e.x, e.y, '#ff4d6d', 18);
+          state.enemies.splice(i, 1);
+          audio.playBlast();
+          updateHUD();
+          if (state.life <= 0) { finishRun(false); return; }
+          continue;
+        }
+
+        if (!e.flying) {
+          for (let ti = state.routeTraps.length - 1; ti >= 0; ti--) {
+            const tr = state.routeTraps[ti];
+            tr.cd = Math.max(0, (tr.cd || 0) - dt);
+            if (tr.cd <= 0 && Math.hypot(e.x - tr.x, e.y - tr.y) <= 28) {
+              tr.cd = 0.85;
+              tr.charges--;
+              state.shockwaves.push({ x: tr.x, y: tr.y, r: 6, maxR: 56, ttl: 0.28, color: tr.kind === 'wax' ? '#ff6b4a' : '#4dd0e1' });
+              spawnParticles(tr.x, tr.y, tr.kind === 'wax' ? '#ff922b' : '#80ffea', 12);
+              audio.playStamp();
+              state.enemies.slice().forEach(victim => {
+                if (!victim.flying && Math.hypot(victim.x - tr.x, victim.y - tr.y) <= 56) {
+                  if (tr.kind === 'wax') {
+                    victim.stunTimer = Math.max(victim.stunTimer, 1.4);
+                    victim.inkTimer = 5.0;
+                    damageEnemy(victim, 95 + state.wave * 18, 3, true, true);
+                  } else {
+                    victim.mercuryTimer = 5.5;
+                    victim.slowTimer = 3.5;
+                    victim.slowFactor = 0.6;
+                    victim.vulnTimer = 3.5;
+                    damageEnemy(victim, 55 + state.wave * 12, 1, false, false);
+                  }
+                }
+              });
+              if (tr.charges <= 0) {
+                if (state.selectedTrapId === tr.id) closeFloatingMenu();
+                state.routeTraps.splice(ti, 1);
+              } else if (state.selectedTrapId === tr.id) refreshFloatingMenu();
+              break;
+            }
+          }
+        }
+      }
+
+      // Update Towers (Lv.1-3 & Lv.4 Fusion)
+      const critChance = 0.08 + state.talents.crit * 0.05;
+      state.towers.forEach(t => {
+        t.recoil = Math.max(0, (t.recoil || 0) - dt * 4);
+        const st = getTowerStats(t);
+        t.cd = Math.max(0, t.cd - dt);
+
+        // Passive Auras: Lv.3 Cryo Mercury & Lv.4 Aurora Distillation (1-2)
+        if ((t.type === 1 && t.level === 3 && t.branch === 1) || (t.level === 4 && t.fusionKey === '1-2')) {
+          const isAurora = t.level === 4 && t.fusionKey === '1-2';
+          const auraR = isAurora ? Math.min(st.range, 165) : st.range;
+          state.enemies.slice().forEach(e => {
+            if ((isAurora || !e.flying) && Math.hypot(e.x - t.x, e.y - t.y) <= auraR) {
+              e.slowTimer = 0.4;
+              e.slowFactor = Math.max(e.slowFactor, 0.55);
+              e.mercuryTimer = 3.2;
+              const dot = e.maxHp * (isAurora ? 0.03 : 0.025) * dt;
+              t.totalDamage = (t.totalDamage || 0) + Math.min(e.hp, dot);
+              e.hp -= dot;
+              if (e.hp <= 0) killEnemy(e);
+            }
+          });
+        }
+
+        if (t.cd > 0) return;
+
+        const markedProp = state.props.find(p => p.id === state.priorityPropId && Math.hypot(p.x - t.x, p.y - t.y) <= st.range);
+        const candidates = state.enemies.filter(e => (st.air || !e.flying) && Math.hypot(e.x - t.x, e.y - t.y) <= st.range);
+
+        let target = null;
+        if (markedProp) target = markedProp;
+        else if (candidates.length > 0) {
+          candidates.sort((a, b) => {
+            if (t.targetMode === 'back') return b.remainingDist - a.remainingDist;
+            if (t.targetMode === 'tank') return b.hp - a.hp;
+            if (t.targetMode === 'near') return Math.hypot(a.x - t.x, a.y - t.y) - Math.hypot(b.x - t.x, b.y - t.y);
+            return a.remainingDist - b.remainingDist;
+          });
+          target = candidates[0];
+        }
+        if (!target) return;
+
+        t.angle = Math.atan2(target.y - t.y, target.x - t.x);
+        t.cd = st.rate;
+        t.recoil = 1.0;
+
+        const isProp = target.kind === 'inkwell' || target.kind === 'crystal' || target.kind === 'waxblock';
+        const isCrit = Math.random() < critChance || (t.type === 0 && t.level === 3 && t.branch === 0 && Math.random() < 0.3);
+
+        // === LV.4 FUSION TOWER ATTACKS ===
+        if (t.level === 4 && t.fusionKey) {
+          const fk = t.fusionKey;
+          if (fk === '0-2') {
+            // 星軌狙擊光弩: Ultra-long piercing hitscan light-bolt, +60% anti-air, double shield break, Black Ink
+            const rayEndX = t.x + Math.cos(t.angle) * st.range;
+            const rayEndY = t.y + Math.sin(t.angle) * st.range;
+            state.beams.push({ x1: t.x, y1: t.y - 26, x2: isProp ? target.x : rayEndX, y2: isProp ? target.y : rayEndY, color: '#38bdf8', width: 4.5, ttl: 0.16 });
+            if (isProp) damageProp(target, st.dmg, t);
+            else {
+              state.enemies.slice().forEach(e => {
+                if (distToSegment(e.x, e.y, t.x, t.y, rayEndX, rayEndY) <= e.r + 10) {
+                  e.inkTimer = 5.0;
+                  const aaMult = e.flying ? 1.60 : 1.0;
+                  damageEnemy(e, st.dmg * aaMult * (isCrit ? 1.85 : 1), 2, false, isCrit, t, true);
+                }
+              });
+            }
+            audio.playLaser();
+          } else if (fk === '0-3') {
+            // 燃墨爆裂連弩: Rapid lead-targeted explosive bolts, hits air & ground, applies ink + Blazing Ink AoE
+            const pred = isProp ? { x: target.x, y: target.y } : predictEnemyPos(target, 0.22);
+            state.projectiles.push({
+              kind: 'fusion_bolt', sourceTowerId: t.id, x: t.x, y: t.y - 22,
+              tx: pred.x, ty: pred.y, isProp, propId: isProp ? target.id : -1,
+              speed: 620, dmg: st.dmg * (isCrit ? 1.7 : 1), crit: isCrit, radius: 68
+            });
+            audio.playShoot();
+          } else if (fk === '0-1') {
+            // 淬毒水銀機弩: Dual-barrel rapid mercury needles, coats & slows BOTH air & ground
+            state.projectiles.push({
+              kind: 'mercury_needle', sourceTowerId: t.id,
+              x: t.x + Math.cos(t.angle) * 18, y: t.y - 20 + Math.sin(t.angle) * 18,
+              tx: target.x, ty: target.y, targetId: target.id, isProp,
+              speed: 680, dmg: st.dmg * (isCrit ? 1.7 : 1), crit: isCrit
+            });
+            audio.playShoot();
+          } else if (fk === '1-2') {
+            // 極光蒸餾巨塔: Refracts 4 beams simultaneously & self-triggers Boiling Steam
+            const targets = isProp ? [target] : candidates.slice(0, 4);
+            const cols = ['#80ffea', '#c084fc', '#67e8f9', '#f472b6'];
+            targets.forEach((tg, bi) => {
+              state.beams.push({ x1: t.x, y1: t.y - 28, x2: tg.x, y2: tg.y - 10, color: cols[bi % 4], width: 3.4, ttl: 0.16 });
+              if (isProp) damageProp(tg, st.dmg, t);
+              else {
+                tg.mercuryTimer = 4.0;
+                damageEnemy(tg, st.dmg * (isCrit ? 1.6 : 1), 2, false, isCrit, t, true);
+              }
+            });
+            audio.playLaser();
+          } else if (fk === '1-3') {
+            // 煉獄熔汞重砲: Lead-targeted molten mercury shell, 1.2s stun, Greek fire pool, Boiling Steam
+            const pred = isProp ? { x: target.x, y: target.y } : predictEnemyPos(target, 0.48);
+            state.projectiles.push({
+              kind: 'flask', sourceTowerId: t.id, sx: t.x, sy: t.y - 24, x: t.x, y: t.y - 24,
+              tx: pred.x, ty: pred.y, isProp, propId: isProp ? target.id : -1,
+              t: 0, dur: 0.48, arcH: 105, dmg: st.dmg * (isCrit ? 1.7 : 1), crit: isCrit,
+              radius: 108, greekFire: true, moltenMercury: true
+            });
+            audio.playBlast();
+          } else if (fk === '2-3') {
+            // 日蝕焚天聚光爐: Orbital solar beam column on target area, strips AoE shields & sustained burn
+            const tx = target.x, ty = target.y;
+            state.beams.push({ x1: tx, y1: 0, x2: tx, y2: ty, color: '#facc15', width: 22, ttl: 0.24 });
+            state.beams.push({ x1: tx, y1: 0, x2: tx, y2: ty, color: '#ffffff', width: 8, ttl: 0.20 });
+            state.shockwaves.push({ x: tx, y: ty, r: 10, maxR: 92, ttl: 0.34, color: '#facc15' });
+            spawnParticles(tx, ty, '#fbbf24', 18);
+            if (isProp) damageProp(target, st.dmg, t);
+            else {
+              state.enemies.slice().forEach(e => {
+                if (Math.hypot(e.x - tx, e.y - ty) <= 92) {
+                  e.shieldHits = 0;
+                  damageEnemy(e, st.dmg * (isCrit ? 1.65 : 1), 3, false, isCrit, t, true);
+                }
+              });
+              state.fireZones.push({ x: tx, y: ty, r: 78, dmg: st.dmg * 0.28, ttl: 2.6, tick: 0.12, sourceTowerId: t.id, hitAir: true, allowBoil: false });
+            }
+            audio.playBlast();
+          }
+          return;
+        }
+
+        // === BASE LV.1-3 TOWER ATTACKS ===
+        if (t.type === 0) {
+          t.shots = (t.shots || 0) + 1;
+          const critMult = (t.level === 3 && t.branch === 0) ? 2.4 : 1.75;
+          state.projectiles.push({
+            kind: 'nib', sourceTowerId: t.id,
+            x: t.x + Math.cos(t.angle) * 18, y: t.y - 14 + Math.sin(t.angle) * 18,
+            tx: target.x, ty: target.y, targetId: target.id, isProp, speed: 540,
+            dmg: st.dmg * (isCrit ? critMult : 1), crit: isCrit,
+            shred: t.level === 3 && t.branch === 0,
+            splash: t.level === 3 && t.branch === 1 && (t.shots % 4 === 0)
+          });
+          audio.playShoot();
+        } else if (t.type === 1) {
+          state.shockwaves.push({ x: t.x, y: t.y, r: 10, maxR: st.range, ttl: 0.32, color: '#58c9b0' });
+          if (isProp) damageProp(target, st.dmg, t);
+          else {
+            candidates.forEach(e => {
+              e.slowTimer = 2.6;
+              e.slowFactor = Math.max(e.slowFactor, 0.42 + t.level * 0.06);
+              e.mercuryTimer = 4.0;
+              if (t.level === 3 && t.branch === 0) { e.stunTimer = 1.25; e.vulnTimer = 2.5; }
+              damageEnemy(e, st.dmg, 1, false, false, t);
+            });
+          }
+          audio.playStamp();
+        } else if (t.type === 2) {
+          let focusMult = 1.0;
+          if (t.level === 3 && t.branch === 0) {
+            if (t.lastTargetId === target.id) t.focusStacks = Math.min(18, (t.focusStacks || 0) + 1);
+            else { t.lastTargetId = target.id; t.focusStacks = 0; }
+            focusMult = 1 + t.focusStacks * 0.1;
+          }
+          const rayEndX = t.x + Math.cos(t.angle) * st.range;
+          const rayEndY = t.y + Math.sin(t.angle) * st.range;
+          state.beams.push({
+            x1: t.x, y1: t.y - 22, x2: isProp ? target.x : rayEndX, y2: isProp ? target.y : rayEndY,
+            color: t.level === 3 && t.branch === 0 ? '#ffe066' : '#c792ea',
+            width: t.level === 3 && t.branch === 0 ? 5 : 3.2, ttl: 0.14
+          });
+          if (isProp) damageProp(target, st.dmg * focusMult, t);
+          else {
+            state.enemies.slice().forEach(e => {
+              if (distToSegment(e.x, e.y, t.x, t.y, rayEndX, rayEndY) <= e.r + 8) {
+                damageEnemy(e, st.dmg * focusMult, 2, false, isCrit, t, true);
+              }
+            });
+            if (t.level === 3 && t.branch === 1) {
+              const others = state.enemies.filter(e => e.id !== target.id && Math.hypot(e.x - target.x, e.y - target.y) <= 135).slice(0, 3);
+              others.forEach((o, bi) => {
+                const cols = ['#ff6b6b', '#51cf66', '#339af0'];
+                state.beams.push({ x1: target.x, y1: target.y - 10, x2: o.x, y2: o.y - 10, color: cols[bi % 3], width: 2.2, ttl: 0.14 });
+                // Refracted beams do NOT double-trigger Boiling Steam true damage
+                damageEnemy(o, st.dmg * 0.65, 2, false, false, t, false);
+              });
+            }
+          }
+          audio.playLaser();
+        } else if (t.type === 3) {
+          // Lead targeting for Alchemical Flask Mortar
+          const pred = isProp ? { x: target.x, y: target.y } : predictEnemyPos(target, 0.48);
+          const baseRadius = 68 + t.level * 8;
+          const hasInkBonus = !isProp && target.inkTimer > 0;
+          state.projectiles.push({
+            kind: 'flask', sourceTowerId: t.id, sx: t.x, sy: t.y - 18, x: t.x, y: t.y - 18,
+            tx: pred.x, ty: pred.y, isProp, propId: isProp ? target.id : -1,
+            t: 0, dur: 0.48, arcH: 95, dmg: st.dmg * (isCrit ? 1.65 : 1), crit: isCrit,
+            radius: hasInkBonus ? Math.round(baseRadius * 1.25) : baseRadius,
+            greekFire: t.level === 3 && t.branch === 0
+          });
+          audio.playShoot();
+        }
+      });
+
+      // Update Projectiles
+      for (let i = state.projectiles.length - 1; i >= 0; i--) {
+        const p = state.projectiles[i];
+        const srcTower = state.towers.find(tw => tw.id === p.sourceTowerId) || null;
+
+        if (p.kind === 'nib' || p.kind === 'mercury_needle') {
+          const targetObj = p.isProp
+            ? state.props.find(pr => pr.id === p.targetId)
+            : state.enemies.find(en => en.id === p.targetId);
+          if (targetObj) { p.tx = targetObj.x; p.ty = targetObj.y - 8; }
+          const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy);
+          if (d <= p.speed * dt + 8) {
+            if (p.isProp && targetObj) damageProp(targetObj, p.dmg, srcTower);
+            else if (targetObj) {
+              if (p.kind === 'mercury_needle') {
+                targetObj.mercuryTimer = 4.5;
+                targetObj.slowTimer = 2.8;
+                targetObj.slowFactor = Math.max(targetObj.slowFactor, 0.50);
+                damageEnemy(targetObj, p.dmg, 0, false, p.crit, srcTower);
+              } else {
+                if (p.shred) targetObj.armor = Math.max(0, targetObj.armor - 0.12);
+                damageEnemy(targetObj, p.dmg, 0, false, p.crit, srcTower);
+                if (p.splash) {
+                  state.shockwaves.push({ x: p.tx, y: p.ty, r: 4, maxR: 48, ttl: 0.2, color: '#3b2818' });
+                  state.enemies.slice().forEach(o => {
+                    if (o.id !== targetObj.id && Math.hypot(o.x - p.tx, o.y - p.ty) <= 48) damageEnemy(o, p.dmg * 0.55, 0, false, false, srcTower);
+                  });
+                }
+              }
+            }
+            state.projectiles.splice(i, 1);
+          } else {
+            p.x += (dx / d) * p.speed * dt;
+            p.y += (dy / d) * p.speed * dt;
+          }
+        } else if (p.kind === 'fusion_bolt') {
+          const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy);
+          if (d <= p.speed * dt + 10) {
+            state.shockwaves.push({ x: p.tx, y: p.ty, r: 6, maxR: p.radius, ttl: 0.26, color: '#fb923c' });
+            spawnParticles(p.tx, p.ty, '#fb923c', 12);
+            if (p.isProp) {
+              const pr = state.props.find(ob => ob.id === p.propId);
+              if (pr) damageProp(pr, p.dmg, srcTower);
+            }
+            state.enemies.slice().forEach(e => {
+              if (Math.hypot(e.x - p.tx, e.y - p.ty) <= p.radius) {
+                e.inkTimer = 4.5;
+                damageEnemy(e, p.dmg, 3, false, p.crit, srcTower, true);
+              }
+            });
+            state.projectiles.splice(i, 1);
+          } else {
+            p.x += (dx / d) * p.speed * dt;
+            p.y += (dy / d) * p.speed * dt;
+          }
+        } else if (p.kind === 'flask') {
+          p.t += dt / p.dur;
+          if (p.t >= 1) {
+            state.shockwaves.push({ x: p.tx, y: p.ty, r: 10, maxR: p.radius, ttl: 0.34, color: p.moltenMercury ? '#f43f5e' : (p.greekFire ? '#51cf66' : '#ff6b4a') });
+            spawnParticles(p.tx, p.ty, p.greekFire ? '#51cf66' : '#ff922b', 18);
+            state.shake = Math.max(state.shake, p.moltenMercury ? 6 : 4);
+            audio.playBlast();
+            if (p.isProp) {
+              const pr = state.props.find(ob => ob.id === p.propId);
+              if (pr) damageProp(pr, p.dmg, srcTower);
+            }
+            state.enemies.slice().forEach(e => {
+              if (!e.flying && Math.hypot(e.x - p.tx, e.y - p.ty) <= p.radius) {
+                if (p.moltenMercury) {
+                  e.mercuryTimer = 5.0;
+                  e.stunTimer = Math.max(e.stunTimer, 1.2);
+                }
+                damageEnemy(e, p.dmg, 3, false, p.crit, srcTower, true);
+              }
+            });
+            if (p.greekFire) {
+              state.fireZones.push({ x: p.tx, y: p.ty, r: p.radius * 0.85, dmg: p.dmg * 0.22, ttl: 4.5, tick: 0.1, sourceTowerId: p.sourceTowerId });
+            }
+            state.projectiles.splice(i, 1);
+          } else {
+            p.x = p.sx + (p.tx - p.sx) * p.t;
+            p.y = p.sy + (p.ty - p.sy) * p.t - Math.sin(p.t * Math.PI) * p.arcH;
+          }
+        }
+      }
+
+      for (let i = state.beams.length - 1; i >= 0; i--) { state.beams[i].ttl -= dt; if (state.beams[i].ttl <= 0) state.beams.splice(i, 1); }
+      for (let i = state.shockwaves.length - 1; i >= 0; i--) {
+        const sw = state.shockwaves[i]; sw.ttl -= dt; sw.r += (sw.maxR - sw.r) * Math.min(1, dt * 14);
+        if (sw.ttl <= 0) state.shockwaves.splice(i, 1);
+      }
+      for (let i = state.particles.length - 1; i >= 0; i--) {
+        const pt = state.particles[i]; pt.ttl -= dt; pt.x += pt.vx * dt; pt.y += pt.vy * dt;
+        if (pt.ttl <= 0) state.particles.splice(i, 1);
+      }
+      for (let i = state.floaters.length - 1; i >= 0; i--) {
+        const fl = state.floaters[i]; fl.ttl -= dt; fl.y -= 26 * dt;
+        if (fl.ttl <= 0) state.floaters.splice(i, 1);
+      }
+
+      if (state.waveActive && state.spawnQueue.length === 0 && state.enemies.length === 0) {
+        state.waveActive = false;
+        const greedMult = 1 + state.talents.greed * 0.10;
+        const aetherGain = Math.max(2, Math.round((3 + Math.floor(state.wave / 3) + state.difficulty) * greedMult));
+        state.aether += aetherGain;
+        state.runAetherEarned += aetherGain;
+        saveProgress();
+
+        if (!state.endless && state.wave >= state.maxWaves - 1) finishRun(true);
+        else {
+          state.wave++;
+          const clearBonus = [24, 16, 12][state.difficulty] || 16;
+          state.gold += Math.round((clearBonus + state.wave * 2) * greedMult);
+          updateHUD();
+          if (state.selectedTowerId >= 0 || state.pendingBuildTile) refreshFloatingMenu();
+          if (state.autoWave) setTimeout(() => { if (!state.paused && !state.waveActive) sendNextWave(); }, 450);
+        }
+      }
+    }
+
+    // ==================== 8. DON'T STARVE 2.5D RENDERING ====================
+    function bakeBattlefieldCanvas(mapIdx) {
+      const off = document.createElement('canvas');
+      off.width = LOGICAL_W;
+      off.height = LOGICAL_H;
+      const g = off.getContext('2d');
+      const map = MAPS[mapIdx];
+
+      const woodGrad = g.createLinearGradient(0, 0, LOGICAL_W, LOGICAL_H);
+      woodGrad.addColorStop(0, '#361f12');
+      woodGrad.addColorStop(0.5, '#462817');
+      woodGrad.addColorStop(1, '#211209');
+      g.fillStyle = woodGrad;
+      g.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+      for (let py = 0; py < LOGICAL_H; py += 88) {
+        g.strokeStyle = 'rgba(14, 7, 3, 0.72)';
+        g.lineWidth = 3;
+        g.beginPath(); g.moveTo(0, py); g.lineTo(LOGICAL_W, py); g.stroke();
+      }
+
+      const left = GRID_OFFSET_X - 18, right = GRID_OFFSET_X + GRID_COLS * TILE_SIZE + 18;
+      const top = GRID_OFFSET_Y - 14, bottom = GRID_OFFSET_Y + GRID_ROWS * TILE_SIZE + 14;
+      g.fillStyle = 'rgba(8, 3, 0, 0.72)';
+      g.fillRect(left + 10, top + 12, right - left, bottom - top);
+
+      const pGrad = g.createRadialGradient(640, 360, 80, 640, 360, 660);
+      if (map.theme === 'forbidden') {
+        pGrad.addColorStop(0, '#5a2d24'); pGrad.addColorStop(0.65, '#421e18'); pGrad.addColorStop(1, '#29110d');
+      } else if (map.theme === 'grimoire') {
+        pGrad.addColorStop(0, '#ead8b8'); pGrad.addColorStop(0.7, '#d4bc92'); pGrad.addColorStop(1, '#b59767');
+      } else {
+        pGrad.addColorStop(0, '#f3dfb2'); pGrad.addColorStop(0.65, '#dfc084'); pGrad.addColorStop(1, '#bf9655');
+      }
+      g.fillStyle = pGrad;
+      g.strokeStyle = '#140b05';
+      g.lineWidth = 4;
+      g.fillRect(left, top, right - left, bottom - top);
+      g.strokeRect(left, top, right - left, bottom - top);
+
+      for (let r = 0; r < GRID_ROWS; r++) {
+        for (let c = 0; c < GRID_COLS; c++) {
+          const tx = GRID_OFFSET_X + c * TILE_SIZE, ty = GRID_OFFSET_Y + r * TILE_SIZE;
+          const isEven = (c + r) % 2 === 0;
+          if (map.theme === 'grimoire') {
+            g.fillStyle = c < 9
+              ? (isEven ? 'rgba(65, 105, 145, 0.14)' : 'rgba(40, 70, 105, 0.08)')
+              : (isEven ? 'rgba(130, 85, 35, 0.14)' : 'rgba(90, 55, 20, 0.07)');
+          } else if (map.theme === 'forbidden') {
+            g.fillStyle = isEven ? 'rgba(0, 0, 0, 0.16)' : 'rgba(255, 110, 60, 0.06)';
+          } else {
+            g.fillStyle = isEven ? 'rgba(110, 72, 30, 0.10)' : 'rgba(255, 240, 200, 0.08)';
+          }
+          g.fillRect(tx, ty, TILE_SIZE, TILE_SIZE);
+          g.strokeStyle = 'rgba(20, 11, 5, 0.16)';
+          g.lineWidth = 1;
+          g.strokeRect(tx, ty, TILE_SIZE, TILE_SIZE);
+          g.strokeStyle = 'rgba(20, 11, 5, 0.25)';
+          g.beginPath(); g.moveTo(tx + 4, ty + 10); g.lineTo(tx + 4, ty + 4); g.lineTo(tx + 10, ty + 4); g.stroke();
+        }
+      }
+
+      if (map.theme === 'grimoire') {
+        const spineX = GRID_OFFSET_X + 8.5 * TILE_SIZE;
+        const spineGrad = g.createLinearGradient(spineX - 24, 0, spineX + 24, 0);
+        spineGrad.addColorStop(0, 'rgba(20,10,5,0)'); spineGrad.addColorStop(0.5, 'rgba(20,10,5,0.45)'); spineGrad.addColorStop(1, 'rgba(20,10,5,0)');
+        g.fillStyle = spineGrad; g.fillRect(spineX - 24, top, 48, bottom - top);
+        g.fillStyle = '#a81c1c'; g.strokeStyle = '#140b05'; g.lineWidth = 2;
+        g.beginPath(); g.moveTo(spineX - 7, top); g.lineTo(spineX + 7, top); g.lineTo(spineX + 7, bottom + 22); g.lineTo(spineX, bottom + 10); g.lineTo(spineX - 7, bottom + 22); g.closePath(); g.fill(); g.stroke();
+      } else if (map.theme === 'forbidden') {
+        g.save(); g.translate(640, 360); g.strokeStyle = 'rgba(255, 95, 50, 0.22)'; g.lineWidth = 2.5;
+        g.beginPath(); g.arc(0, 0, 210, 0, Math.PI * 2); g.stroke();
+        g.beginPath(); g.arc(0, 0, 185, 0, Math.PI * 2); g.stroke();
+        for (let k = 0; k < 2; k++) {
+          g.beginPath();
+          for (let j = 0; j < 3; j++) {
+            const a = (j * 2 * Math.PI) / 3 + (k * Math.PI) / 3 - Math.PI / 2;
+            const px = Math.cos(a) * 185, py = Math.sin(a) * 185;
+            if (j === 0) g.moveTo(px, py); else g.lineTo(px, py);
+          }
+          g.closePath(); g.stroke();
+        }
+        g.restore();
+      } else {
+        g.strokeStyle = 'rgba(92, 56, 24, 0.16)'; g.lineWidth = 1.5;
+        [130, 210, 290].forEach(rad => { g.beginPath(); g.arc(640, 360, rad, 0, Math.PI * 2); g.stroke(); });
+      }
+
+      // 4-Pass Seamless Mercury Track Baking
+      const passes = [{ color: '#140b05', width: 48 }, { color: '#9e7339', width: 40 }, { color: '#6b9aa8', width: 28 }, { color: '#bfe6f2', width: 16 }];
+      g.lineCap = 'round'; g.lineJoin = 'round';
+      passes.forEach(pass => {
+        g.strokeStyle = pass.color; g.lineWidth = pass.width;
+        map.paths.forEach(route => {
+          g.beginPath(); route.forEach((pt, idx) => idx === 0 ? g.moveTo(pt.x, pt.y) : g.lineTo(pt.x, pt.y)); g.stroke();
+        });
+      });
+
+      (map.hotspots || []).forEach(([c, r]) => {
+        const ctr = tileCenter(c, r);
+        const hg = g.createRadialGradient(ctr.x, ctr.y, 4, ctr.x, ctr.y, 28);
+        hg.addColorStop(0, 'rgba(255, 90, 20, 0.72)'); hg.addColorStop(1, 'rgba(255, 60, 0, 0)');
+        g.fillStyle = hg; g.beginPath(); g.arc(ctr.x, ctr.y, 28, 0, Math.PI * 2); g.fill();
+        g.strokeStyle = '#ff6d00'; g.lineWidth = 2.5; g.beginPath(); g.arc(ctr.x, ctr.y, 16, 0, Math.PI * 2); g.stroke();
+      });
+
+      (map.blockedTiles || []).forEach(([c, r]) => {
+        const ctr = tileCenter(c, r);
+        g.fillStyle = '#140d1a'; g.strokeStyle = '#3d1c4a'; g.lineWidth = 2.5;
+        g.beginPath(); g.ellipse(ctr.x, ctr.y, 24, 18, 0.2, 0, Math.PI * 2); g.fill(); g.stroke();
+        drawCrossHatch(g, ctr.x - 18, ctr.y - 12, 36, 24, 5, 0.4);
+      });
+
+      (map.cursedAltars || []).forEach(([c, r]) => {
+        const tx = GRID_OFFSET_X + c * TILE_SIZE, ty = GRID_OFFSET_Y + r * TILE_SIZE;
+        g.fillStyle = 'rgba(215, 55, 25, 0.26)'; g.fillRect(tx + 3, ty + 3, TILE_SIZE - 6, TILE_SIZE - 6);
+        g.strokeStyle = '#ff5722'; g.lineWidth = 2.4; g.strokeRect(tx + 4, ty + 4, TILE_SIZE - 8, TILE_SIZE - 8);
+      });
+
+      (map.astralDais || []).forEach(([c, r]) => {
+        const ctr = tileCenter(c, r);
+        g.strokeStyle = '#4dd0e1'; g.lineWidth = 2; g.beginPath(); g.arc(ctr.x, ctr.y, 23, 0, Math.PI * 2); g.stroke();
+      });
+
+      drawBakedCandle(g, 48, 108, map.theme === 'forbidden' ? '#b71c1c' : '#fff5dc');
+      if (map.theme === 'forbidden') drawBakedCandle(g, 1232, 108, '#b71c1c');
+      drawBakedInkwellAndQuill(g, 46, 560);
+      drawBakedAlchemyFlask(g, 1234, 210, '#4caf50', '#b9f6ca');
+      drawBakedAlchemyFlask(g, 1234, 460, '#9c27b0', '#ea80fc');
+      bakedMapCanvases[mapIdx] = off;
+    }
+
+    function drawBakedCandle(g, x, y, waxCol = '#fff5dc') {
+      g.save(); g.translate(x, y);
+      g.fillStyle = '#c89643'; g.strokeStyle = '#140b05'; g.lineWidth = 2.8;
+      g.beginPath(); g.ellipse(0, 12, 22, 12, 0, 0, Math.PI * 2); g.fill(); g.stroke();
+      g.fillStyle = waxCol; g.fillRect(-10, -28, 20, 38); g.strokeRect(-10, -28, 20, 38);
+      drawCrossHatch(g, -10, -10, 20, 20, 5, 0.2);
+      g.restore();
+    }
+
+    function drawBakedInkwellAndQuill(g, x, y) {
+      g.save(); g.translate(x, y);
+      g.fillStyle = '#1a2738'; g.strokeStyle = '#140b05'; g.lineWidth = 2.8;
+      g.beginPath(); g.roundRect(-15, -8, 30, 24, 6); g.fill(); g.stroke();
+      g.fillStyle = '#ede0c8';
+      g.beginPath(); g.moveTo(-4, -14); g.quadraticCurveTo(-28, -42, -32, -70); g.quadraticCurveTo(-10, -52, -4, -14); g.fill(); g.stroke();
+      g.restore();
+    }
+
+    function drawBakedAlchemyFlask(g, x, y, colMain, colHi) {
+      g.save(); g.translate(x, y);
+      const fg = g.createRadialGradient(-6, 0, 3, 0, 4, 22);
+      fg.addColorStop(0, colHi); fg.addColorStop(0.55, colMain); fg.addColorStop(1, '#14241b');
+      g.fillStyle = fg; g.strokeStyle = '#140b05'; g.lineWidth = 2.8;
+      g.beginPath(); g.arc(0, 4, 20, 0, Math.PI * 2); g.fill(); g.stroke();
+      g.fillStyle = '#8d5b34'; g.fillRect(-6, -24, 12, 10); g.strokeRect(-6, -24, 12, 10);
+      g.restore();
+    }
+
+    function drawArcanePortal(x, y) {
+      ctx.save(); ctx.translate(x, y);
+      ctx.strokeStyle = '#140b05'; ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.ellipse(0, 0, 24, 16, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.strokeStyle = '#d4a24c'; ctx.lineWidth = 2.5; ctx.stroke();
+      const vg = ctx.createRadialGradient(0, 0, 2, 0, 0, 20);
+      vg.addColorStop(0, '#e0f7fa'); vg.addColorStop(0.55, '#4dd0e1'); vg.addColorStop(1, 'rgba(38, 166, 154, 0.15)');
+      ctx.fillStyle = vg; ctx.beginPath(); ctx.ellipse(0, 0, 20, 13, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawPhilosopherStone(x, y) {
+      ctx.save(); ctx.translate(x, y);
+      const glow = ctx.createRadialGradient(0, -10, 4, 0, -10, 52);
+      glow.addColorStop(0, 'rgba(255, 50, 80, 0.5)'); glow.addColorStop(1, 'rgba(255, 30, 60, 0)');
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(0, -10, 52, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.beginPath(); ctx.ellipse(2, 12, 30, 17, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#d4a24c'; ctx.strokeStyle = '#140b05'; ctx.lineWidth = 2.8;
+      ctx.beginPath(); ctx.ellipse(0, 6, 28, 15, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      const bob = Math.sin(state.time * 3.4) * 4.5;
+      ctx.translate(0, -22 + bob);
+      ctx.fillStyle = '#c61a32';
+      ctx.beginPath(); ctx.moveTo(0, -22); ctx.lineTo(14, -8); ctx.lineTo(14, 8); ctx.lineTo(0, 22); ctx.lineTo(-14, 8); ctx.lineTo(-14, -8); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#ff6b8b';
+      ctx.beginPath(); ctx.moveTo(0, -22); ctx.lineTo(6, -7); ctx.lineTo(0, 5); ctx.lineTo(-14, -8); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawDeskProp(p) {
+      ctx.save(); ctx.translate(p.x, p.y);
+      ctx.fillStyle = 'rgba(14, 7, 3, 0.52)'; ctx.beginPath(); ctx.ellipse(2, 8, 22, 13, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#140b05'; ctx.lineWidth = 2.8;
+      if (p.kind === 'inkwell') {
+        ctx.fillStyle = p.hitFlash > 0 ? '#fff' : '#1b2838';
+        ctx.beginPath(); ctx.roundRect(-14, -14, 28, 22, 6); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#f5e6c8';
+        ctx.beginPath(); ctx.moveTo(2, -14); ctx.quadraticCurveTo(14, -32, 20, -42); ctx.quadraticCurveTo(8, -30, -2, -14); ctx.fill(); ctx.stroke();
+      } else if (p.kind === 'crystal') {
+        const col = p.hitFlash > 0 ? '#fff' : '#8e24aa';
+        [{ dx: -7, h: 22, rot: -0.25 }, { dx: 7, h: 19, rot: 0.25 }, { dx: 0, h: 28, rot: 0.02 }].forEach(s => {
+          ctx.save(); ctx.translate(s.dx, 4); ctx.rotate(s.rot); ctx.fillStyle = col;
+          ctx.beginPath(); ctx.moveTo(0, -s.h); ctx.lineTo(6, -s.h * 0.4); ctx.lineTo(5, 2); ctx.lineTo(-5, 2); ctx.lineTo(-6, -s.h * 0.4); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.restore();
+        });
+      } else {
+        ctx.fillStyle = p.hitFlash > 0 ? '#fff' : '#9b1c1c';
+        ctx.beginPath(); ctx.ellipse(0, 2, 18, 11, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#c98a2c'; ctx.fillRect(-5, -15, 10, 14); ctx.strokeRect(-5, -15, 10, 14);
+      }
+      if (state.priorityPropId === p.id) {
+        ctx.strokeStyle = '#ff5252'; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.arc(0, -8, 25, 0, Math.PI * 2); ctx.stroke();
+      }
+      const ratio = Math.max(0, p.hp / p.maxHp);
+      ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(-18, -34, 36, 5);
+      ctx.fillStyle = '#ffd166'; ctx.fillRect(-17, -33, 34 * ratio, 3);
+      ctx.restore();
+    }
+
+    function drawRouteTrap25D(tr) {
+      ctx.save(); ctx.translate(tr.x, tr.y);
+      ctx.fillStyle = 'rgba(15, 10, 6, 0.55)'; ctx.beginPath(); ctx.ellipse(1, 3, 21, 13, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = tr.kind === 'wax' ? '#8f1d14' : '#184e59';
+      ctx.strokeStyle = state.selectedTrapId === tr.id ? '#ffe066' : '#140b05';
+      ctx.lineWidth = state.selectedTrapId === tr.id ? 3 : 2.6;
+      ctx.beginPath(); ctx.ellipse(0, 0, 19, 12, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      for (let i = 0; i < tr.charges; i++) {
+        const a = (i / tr.maxCharges) * Math.PI * 2;
+        ctx.fillStyle = '#ffe066'; ctx.beginPath(); ctx.arc(Math.cos(a) * 12, Math.sin(a) * 7, 2.3, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawTower25D(t) {
+      ctx.save();
+      ctx.translate(t.x, t.y);
+      const isSel = state.selectedTowerId === t.id;
+      const isFusion = t.level === 4;
+      const oc = t.overclock || 0;
+
+      // Overclock Glowing Rune Rings on Base
+      if (oc > 0) {
+        const rings = Math.min(3, oc);
+        for (let r = 0; r < rings; r++) {
+          ctx.strokeStyle = isFusion ? 'rgba(103, 232, 249, 0.85)' : 'rgba(255, 224, 102, 0.8)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.ellipse(0, 4, 27 + r * 4, 17 + r * 2.5, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+
+      // Shadow
+      ctx.fillStyle = 'rgba(10, 5, 2, 0.58)';
+      ctx.beginPath(); ctx.ellipse(2, 7, isFusion ? 28 : 25, isFusion ? 17 : 15, 0, 0, Math.PI * 2); ctx.fill();
+
+      // Base Pad
+      ctx.fillStyle = isFusion ? '#164e63' : (t.isGolden ? '#d4a24c' : t.isCursedAltar ? '#a63a24' : '#7a5226');
+      ctx.strokeStyle = isSel ? '#ffe066' : (isFusion ? '#67e8f9' : '#140b05');
+      ctx.lineWidth = isSel || isFusion ? 3 : 2.8;
+      ctx.beginPath(); ctx.ellipse(0, 3, isFusion ? 26 : 23, isFusion ? 16 : 14, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+      const colH = isFusion ? 34 : (14 + t.level * 5);
+      const pedGrad = ctx.createLinearGradient(-16, 0, 16, 0);
+      if (isFusion) {
+        pedGrad.addColorStop(0, '#0f172a'); pedGrad.addColorStop(0.5, '#67e8f9'); pedGrad.addColorStop(1, '#1e1b4b');
+      } else {
+        pedGrad.addColorStop(0, '#2c1709'); pedGrad.addColorStop(0.5, '#d4a24c'); pedGrad.addColorStop(1, '#1e0e04');
+      }
+      ctx.fillStyle = pedGrad;
+      ctx.strokeStyle = '#140b05';
+      ctx.lineWidth = 2.6;
+      ctx.beginPath();
+      ctx.moveTo(-16, 0); ctx.lineTo(-14, -colH);
+      ctx.quadraticCurveTo(0, -colH - 5, 14, -colH);
+      ctx.lineTo(16, 0); ctx.quadraticCurveTo(0, 8, -16, 0);
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+
+      // Deck
+      ctx.fillStyle = isFusion ? (FUSION_DEFS[t.fusionKey]?.color || '#67e8f9') : (t.level === 3 ? (t.branch === 0 ? '#ffe57f' : '#64ffda') : '#f0c975');
+      ctx.beginPath(); ctx.ellipse(0, -colH, isFusion ? 21 : 19, isFusion ? 13 : 11.5, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+      ctx.save();
+      ctx.translate(0, -colH - 4);
+      const recoilOffset = (t.recoil || 0) * -6;
+
+      if (isFusion) {
+        // Ornate Lv.4 Fusion Turret Silhouette + Arcane Halo
+        ctx.save();
+        ctx.rotate(state.time * 2.2);
+        ctx.strokeStyle = '#fef08a';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(0, -10, 18, 0, Math.PI * 1.4); ctx.stroke();
+        ctx.restore();
+
+        ctx.fillStyle = FUSION_DEFS[t.fusionKey]?.color || '#67e8f9';
+        ctx.strokeStyle = '#140b05';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(0, -24); ctx.lineTo(14, -8); ctx.lineTo(8, 6); ctx.lineTo(-8, 6); ctx.lineTo(-14, -8);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath(); ctx.arc(0, -10, 5, 0, Math.PI * 2); ctx.fill();
+      } else if (t.type === 0) {
+        ctx.rotate(t.angle || 0); ctx.translate(recoilOffset, 0);
+        ctx.fillStyle = '#7c4722'; ctx.beginPath(); ctx.roundRect(-14, -5, 25, 10, 2); ctx.fill(); ctx.stroke();
+        ctx.strokeStyle = '#ffd571'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(6, -19); ctx.quadraticCurveTo(16, 0, 6, 19); ctx.stroke();
+        ctx.fillStyle = '#eceff1'; ctx.strokeStyle = '#140b05'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(25, 0); ctx.lineTo(7, -6); ctx.lineTo(-3, -3); ctx.lineTo(-3, 3); ctx.lineTo(7, 6); ctx.closePath(); ctx.fill(); ctx.stroke();
+      } else if (t.type === 1) {
+        const slam = (t.recoil || 0) * 7;
+        ctx.fillStyle = t.level === 3 && t.branch === 1 ? '#4dd0e1' : '#ffb300';
+        ctx.beginPath(); ctx.moveTo(-10, -22); ctx.lineTo(10, -22); ctx.lineTo(3, -11); ctx.lineTo(10, 0); ctx.lineTo(-10, 0); ctx.lineTo(-3, -11); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#9b1c1c'; ctx.beginPath(); ctx.ellipse(0, -23 + slam, 14, 7, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      } else if (t.type === 2) {
+        const bob = Math.sin(state.time * 4.2) * 3;
+        ctx.translate(0, -14 + bob);
+        ctx.fillStyle = '#84ffff'; ctx.beginPath(); ctx.moveTo(0, -16); ctx.lineTo(-12, 0); ctx.lineTo(0, 14); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#ff80ab'; ctx.beginPath(); ctx.moveTo(0, -16); ctx.lineTo(12, 0); ctx.lineTo(0, 14); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(0, -16); ctx.lineTo(12, 0); ctx.lineTo(0, 14); ctx.lineTo(-12, 0); ctx.closePath(); ctx.stroke();
+      } else {
+        ctx.translate(0, -10); ctx.rotate((t.angle || 0) * 0.35 - 0.55); ctx.translate(recoilOffset, 0);
+        ctx.fillStyle = '#455a64'; ctx.beginPath(); ctx.roundRect(-11, -10, 26, 20, 6); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = t.level === 3 && t.branch === 0 ? '#00e676' : '#ff6d00';
+        ctx.beginPath(); ctx.ellipse(14, 0, 3.8, 7, 0, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+
+      // Level Stars (4 cyan stars for Lv.4 Fusion)
+      for (let s = 0; s < t.level; s++) {
+        const sx = (s - (t.level - 1) / 2) * 8.5;
+        ctx.fillStyle = isFusion ? '#67e8f9' : '#ffe066';
+        ctx.strokeStyle = '#140b05';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(sx, 14, 3.4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      }
+
+      // Overclock +N Badge on Canvas
+      if (oc > 0) {
+        ctx.font = '900 13px "Noto Serif TC", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#140b05';
+        ctx.strokeText(`+${oc}`, 20, -colH - 14);
+        ctx.fillStyle = '#67e8f9';
+        ctx.fillText(`+${oc}`, 20, -colH - 14);
+      }
+
+      ctx.restore();
+    }
+
+    function drawEnemy25D(e) {
+      ctx.save();
+      const flyOffset = e.flying ? 26 + Math.sin(state.time * 8 + e.id) * 5 : Math.abs(Math.sin(e.walkPhase)) * 4.5;
+      const swing = Math.sin(e.walkPhase) * 4;
+      ctx.fillStyle = 'rgba(14, 7, 3, 0.45)';
+      ctx.beginPath(); ctx.ellipse(e.x, e.y + 7, e.r * 0.95, e.r * 0.52, 0, 0, Math.PI * 2); ctx.fill();
+
+      ctx.translate(e.x, e.y - flyOffset);
+      ctx.strokeStyle = '#140b05';
+      ctx.lineWidth = 2.6;
+
+      if (e.kind === 'paper') {
+        ctx.fillStyle = e.hitFlash > 0 ? '#fff' : '#ebd5b3';
+        ctx.fillRect(-6, 4 + swing * 0.4, 4, 8); ctx.strokeRect(-6, 4 + swing * 0.4, 4, 8);
+        ctx.fillRect(2, 4 - swing * 0.4, 4, 8); ctx.strokeRect(2, 4 - swing * 0.4, 4, 8);
+        ctx.beginPath(); ctx.roundRect(-8, -5, 16, 11, 2); ctx.roundRect(-9, -18, 18, 14, 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#140b05'; ctx.beginPath(); ctx.arc(-4, -11, 1.8, 0, Math.PI * 2); ctx.arc(4, -11, 1.8, 0, Math.PI * 2); ctx.fill();
+      } else if (e.kind === 'golem') {
+        ctx.fillStyle = e.hitFlash > 0 ? '#fff' : '#607d8b';
+        ctx.beginPath(); ctx.roundRect(-18, -6 + swing, 7, 13, 2); ctx.roundRect(11, -6 - swing, 7, 13, 2); ctx.roundRect(-13, -12, 26, 20, 4); ctx.roundRect(-9, -23, 18, 13, 3); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = e.hp < e.maxHp * 0.45 ? '#ff1744' : '#ffd54f';
+        ctx.beginPath(); ctx.arc(-4, -17, 2.2, 0, Math.PI * 2); ctx.arc(4, -17, 2.2, 0, Math.PI * 2); ctx.fill();
+      } else if (e.kind === 'moth') {
+        const wing = Math.sin(state.time * 20 + e.id) * 7;
+        ctx.fillStyle = e.hitFlash > 0 ? '#fff' : '#f3c68f';
+        ctx.beginPath();
+        ctx.moveTo(0, -4); ctx.lineTo(-22, -14 + wing); ctx.lineTo(-15, 6 + wing * 0.5); ctx.closePath();
+        ctx.moveTo(0, -4); ctx.lineTo(22, -14 + wing); ctx.lineTo(15, 6 + wing * 0.5); ctx.closePath();
+        ctx.fill(); ctx.stroke();
+      } else if (e.kind === 'boss' || e.kind === 'beetle') {
+        ctx.fillStyle = e.hitFlash > 0 ? '#fff' : (e.kind === 'boss' ? '#5e1914' : '#b8860b');
+        ctx.strokeStyle = '#ffd54f';
+        ctx.beginPath(); ctx.ellipse(0, -6, e.r, e.r * 0.78, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#ff1744'; ctx.beginPath(); ctx.arc(-6, -8, 3, 0, Math.PI * 2); ctx.arc(6, -8, 3, 0, Math.PI * 2); ctx.fill();
+      } else {
+        ctx.fillStyle = e.hitFlash > 0 ? '#fff' : (e.kind === 'slime' ? '#4dd0e1' : e.kind === 'shield' ? '#9575cd' : '#80cbc4');
+        ctx.beginPath(); ctx.arc(0, -6, e.r * 0.85, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      }
+
+      if (e.mercuryTimer > 0) { ctx.strokeStyle = '#80ffea'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(0, 2, e.r, e.r * 0.5, 0, 0, Math.PI * 2); ctx.stroke(); }
+      if (e.overheatTimer > 0) { ctx.strokeStyle = '#ff6d00'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(0, -6, e.r + 2, 0, Math.PI * 2); ctx.stroke(); }
+      if (e.shieldHits > 0) { ctx.strokeStyle = '#7ce8ff'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.arc(0, -8, e.r + 5, 0, Math.PI * 2); ctx.stroke(); }
+
+      const bw = Math.max(26, e.r * 1.9);
+      const ratio = Math.max(0, e.hpDisplay / e.maxHp);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.82)'; ctx.fillRect(-bw / 2, -e.r - 22, bw, 5);
+      ctx.fillStyle = e.kind === 'boss' ? '#ff4d6d' : '#51cf66'; ctx.fillRect(-bw / 2 + 1, -e.r - 21, (bw - 2) * ratio, 3);
+      ctx.restore();
+    }
+
+    function drawDynamicDeskAmbience() {
+      ctx.save();
+      const flicker = Math.sin(state.time * 17) * 1.5 + Math.cos(state.time * 29) * 1.0;
+      const candles = MAPS[state.mapIndex].theme === 'forbidden' ? [[48, 70], [1232, 70]] : [[48, 70]];
+      candles.forEach(([cx, cy]) => {
+        const cg = ctx.createRadialGradient(cx, cy, 2, cx, cy, 62 + flicker * 4);
+        cg.addColorStop(0, 'rgba(255, 240, 160, 0.85)'); cg.addColorStop(0.4, 'rgba(255, 160, 40, 0.35)'); cg.addColorStop(1, 'rgba(255, 120, 10, 0)');
+        ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx, cy, 62 + flicker * 4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#fff9c4';
+        ctx.beginPath(); ctx.moveTo(cx, cy - 14 + flicker); ctx.quadraticCurveTo(cx + 6, cy - 2, cx, cy + 6); ctx.quadraticCurveTo(cx - 6, cy - 2, cx, cy - 14 + flicker); ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    function drawScene() {
+      ctx.save();
+      if (state.shake > 0) ctx.translate((Math.random() - 0.5) * state.shake, (Math.random() - 0.5) * state.shake);
+      if (!bakedMapCanvases[state.mapIndex]) bakeBattlefieldCanvas(state.mapIndex);
+      ctx.drawImage(bakedMapCanvases[state.mapIndex], 0, 0);
+
+      const map = MAPS[state.mapIndex];
+      state.goldenTiles.forEach(k => {
+        const [c, r] = k.split(',').map(Number);
+        const ctr = tileCenter(c, r);
+        ctx.save(); ctx.translate(ctr.x, ctr.y);
+        const rg = ctx.createRadialGradient(0, 0, 4, 0, 0, 28);
+        rg.addColorStop(0, 'rgba(255, 215, 80, 0.42)'); rg.addColorStop(1, 'rgba(255, 180, 30, 0)');
+        ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(0, 0, 28, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 224, 102, 0.9)'; ctx.lineWidth = 2; ctx.setLineDash([5, 4]); ctx.lineDashOffset = -state.time * 16; ctx.stroke();
+        ctx.restore();
+      });
+
+      map.paths.forEach(route => {
+        ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(235, 255, 252, 0.82)'; ctx.lineWidth = 6; ctx.setLineDash([16, 22]); ctx.lineDashOffset = -state.time * 44;
+        ctx.beginPath(); route.forEach((pt, idx) => idx === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y)); ctx.stroke();
+        ctx.restore();
+      });
+
+      map.portalPoints.forEach(pt => drawArcanePortal(pt.x, pt.y));
+      state.routeTraps.forEach(tr => drawRouteTrap25D(tr));
+      map.endPoints.forEach(pt => drawPhilosopherStone(pt.x, pt.y));
+
+      state.fireZones.forEach(z => {
+        const g = ctx.createRadialGradient(z.x, z.y, 4, z.x, z.y, z.r);
+        g.addColorStop(0, z.hitAir ? 'rgba(250, 204, 21, 0.55)' : 'rgba(110, 255, 140, 0.55)');
+        g.addColorStop(1, 'rgba(30, 160, 80, 0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(z.x, z.y, z.r, z.r * 0.72, 0, 0, Math.PI * 2); ctx.fill();
+      });
+
+      // Fusion Partner Highlight Brackets
+      if (state.fusionSourceId >= 0) {
+        const src = state.towers.find(t => t.id === state.fusionSourceId);
+        const partners = getEligibleFusionPartners(src);
+        const pulse = 0.65 + Math.sin(state.time * 7) * 0.35;
+        partners.forEach(pt => {
+          const tx = GRID_OFFSET_X + pt.col * TILE_SIZE, ty = GRID_OFFSET_Y + pt.row * TILE_SIZE;
+          ctx.save();
+          ctx.strokeStyle = `rgba(103, 232, 249, ${pulse})`;
+          ctx.fillStyle = 'rgba(103, 232, 249, 0.18)';
+          ctx.lineWidth = 3.5;
+          ctx.fillRect(tx + 2, ty + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+          ctx.strokeRect(tx + 2, ty + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+          if (state.hoverTile && state.hoverTile.col === pt.col && state.hoverTile.row === pt.row) {
+            const fDef = FUSION_DEFS[getFusionKey(src.type, pt.type)];
+            if (fDef) {
+              ctx.font = '900 15px "Noto Serif TC", sans-serif';
+              ctx.textAlign = 'center';
+              ctx.lineWidth = 3.5;
+              ctx.strokeStyle = '#140b05';
+              const label = `⚗️ 合成：${fDef.nameZh} (🪙${getFusionCost(src)})`;
+              ctx.strokeText(label, pt.x, ty - 10);
+              ctx.fillStyle = '#67e8f9';
+              ctx.fillText(label, pt.x, ty - 10);
+            }
+          }
+          ctx.restore();
+        });
+      }
+
+      // Grid Hover Preview
+      const activeTile = state.pendingBuildTile || state.hoverTile;
+      if (activeTile && state.selectedTowerId < 0 && state.selectedTrapId < 0 && state.fusionSourceId < 0) {
+        const ev = evaluateTile(activeTile.col, activeTile.row);
+        if (!ev.existingTower && !ev.existingTrap) {
+          const tx = GRID_OFFSET_X + activeTile.col * TILE_SIZE, ty = GRID_OFFSET_Y + activeTile.row * TILE_SIZE;
+          const ctr = tileCenter(activeTile.col, activeTile.row);
+          const qb = state.quickBuild;
+          let canPlaceHere = false, previewR = 0, col = '#ff4d6d', tipText = '';
+
+          if (qb) {
+            if (qb.mode === 'tower') {
+              const cost = getBuildCost(qb.type, !!ev.isCursedAltar);
+              canPlaceHere = ev.validTower && state.gold >= cost;
+              previewR = getTowerStats({ type: qb.type, level: 1, branch: 0, isGolden: !!ev.isGolden, isAstralDais: !!ev.isAstralDais, isCursedAltar: !!ev.isCursedAltar }).range;
+              col = canPlaceHere ? (ev.isCursedAltar ? '#ff7043' : (ev.isGolden || ev.isAstralDais) ? '#ffd740' : '#51cf66') : '#ff4d6d';
+              const def = TOWER_DEFS[qb.type];
+              tipText = !ev.validTower ? (ev.reason || '不可建造於此格') : state.gold < cost ? `🪙 金幣不足 (${def.nameZh} 需 ${cost})` : `${def.nameZh} 🪙${cost}`;
+            } else {
+              canPlaceHere = ev.validTrap && state.gold >= qb.cost;
+              previewR = 56;
+              col = canPlaceHere ? '#4dd0e1' : '#ff4d6d';
+              const tName = qb.kind === 'wax' ? '皇家火漆爆破印' : '極寒水銀漩渦陣';
+              tipText = !ev.validTrap ? '⚠️ 陷阱僅能鋪設於空水銀軌道格' : state.gold < qb.cost ? `🪙 金幣不足 (${tName} 需 ${qb.cost})` : `${tName} 🪙${qb.cost}`;
+            }
+          } else {
+            canPlaceHere = ev.validTower || ev.validTrap;
+            col = ev.validTower ? (ev.isCursedAltar ? '#ff5722' : (ev.isGolden || ev.isAstralDais) ? '#ffd740' : '#51cf66') : ev.validTrap ? '#4dd0e1' : '#ff4d6d';
+            previewR = ev.validTrap ? 56 : 175 * (ev.isGolden ? 1.15 : 1) * (ev.isAstralDais ? 1.20 : 1);
+            if (ev.validTower) tipText = getTerrainBonusLabel(ev.isGolden, ev.isAstralDais, ev.isCursedAltar);
+            else if (ev.validTrap && ev.isHotspot) tipText = '🔥 蒸餾高熱節點 (+25%元素易傷)｜可設陷阱';
+            else if (ev.isBlocked) tipText = '⛔ 腐蝕黑墨池 (不可建造)';
+            else if (ev.existingProp && ev.isAstralDais) tipText = '✨ 拆除水晶解鎖：星象高台 (+20% 射程)';
+          }
+
+          ctx.save();
+          if (previewR > 0 && (canPlaceHere || qb)) {
+            ctx.strokeStyle = col;
+            ctx.fillStyle = canPlaceHere ? 'rgba(81, 207, 102, 0.08)' : 'rgba(255, 77, 109, 0.06)';
+            ctx.lineWidth = 2; ctx.setLineDash([8, 6]); ctx.lineDashOffset = -state.time * 22;
+            ctx.beginPath(); ctx.arc(ctr.x, ctr.y, previewR, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          }
+          ctx.setLineDash([]);
+          ctx.fillStyle = canPlaceHere ? 'rgba(81, 207, 102, 0.22)' : 'rgba(255, 77, 109, 0.22)';
+          ctx.strokeStyle = col; ctx.lineWidth = 3;
+          ctx.fillRect(tx + 2, ty + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+          ctx.strokeRect(tx + 2, ty + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+
+          if (tipText) {
+            ctx.font = '800 15px "Noto Serif TC", sans-serif';
+            ctx.textAlign = 'center'; ctx.lineWidth = 3.5; ctx.strokeStyle = '#140b05';
+            const tipY = ty > 100 ? ty - 12 : ty + TILE_SIZE + 22;
+            const tipX = Math.max(230, Math.min(LOGICAL_W - 230, ctr.x));
+            ctx.strokeText(tipText, tipX, tipY);
+            ctx.fillStyle = col; ctx.fillText(tipText, tipX, tipY);
+          }
+          ctx.restore();
+        }
+      }
+
+      const renderList = [];
+      state.props.forEach(p => renderList.push({ y: p.y, kind: 'prop', obj: p }));
+      state.towers.forEach(t => renderList.push({ y: t.y, kind: 'tower', obj: t }));
+      state.enemies.forEach(e => renderList.push({ y: e.y, kind: 'enemy', obj: e }));
+      renderList.sort((a, b) => a.y - b.y);
+      renderList.forEach(item => {
+        if (item.kind === 'prop') drawDeskProp(item.obj);
+        else if (item.kind === 'tower') drawTower25D(item.obj);
+        else drawEnemy25D(item.obj);
+      });
+
+      drawDynamicDeskAmbience();
+
+      state.beams.forEach(b => {
+        ctx.save(); ctx.strokeStyle = b.color; ctx.lineWidth = b.width; ctx.shadowColor = b.color; ctx.shadowBlur = 14;
+        ctx.beginPath(); ctx.moveTo(b.x1, b.y1); ctx.lineTo(b.x2, b.y2); ctx.stroke();
+        ctx.restore();
+      });
+
+      state.projectiles.forEach(p => {
+        if (p.kind === 'nib' || p.kind === 'mercury_needle' || p.kind === 'fusion_bolt') {
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(Math.atan2(p.ty - p.y, p.tx - p.x));
+          ctx.fillStyle = p.kind === 'mercury_needle' ? '#2dd4bf' : p.kind === 'fusion_bolt' ? '#fb923c' : '#ffe066';
+          ctx.strokeStyle = '#140b05'; ctx.lineWidth = 1.6;
+          ctx.beginPath(); ctx.moveTo(13, 0); ctx.lineTo(-5, -4.5); ctx.lineTo(-3, 0); ctx.lineTo(-5, 4.5); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.restore();
+        } else if (p.kind === 'flask') {
+          const groundY = p.sy + (p.ty - p.sy) * p.t;
+          ctx.fillStyle = 'rgba(0,0,0,0.32)'; ctx.beginPath(); ctx.ellipse(p.x, groundY, 10, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.save(); ctx.translate(p.x, p.y);
+          const fg = ctx.createRadialGradient(-2, -2, 1, 0, 0, 9);
+          fg.addColorStop(0, '#ffffff'); fg.addColorStop(0.4, p.moltenMercury ? '#f43f5e' : (p.greekFire ? '#69f0ae' : '#ff9100')); fg.addColorStop(1, '#1b5e20');
+          ctx.fillStyle = fg; ctx.beginPath(); ctx.arc(0, 0, p.moltenMercury ? 11 : 8.5, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+        }
+      });
+
+      state.shockwaves.forEach(sw => {
+        ctx.save(); ctx.strokeStyle = sw.color; ctx.globalAlpha = Math.max(0, sw.ttl * 2.5); ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.ellipse(sw.x, sw.y, sw.r, sw.r * 0.68, 0, 0, Math.PI * 2); ctx.stroke();
+        ctx.restore();
+      });
+
+      state.particles.forEach(pt => {
+        ctx.save(); ctx.fillStyle = pt.color; ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      });
+
+      state.floaters.forEach(fl => {
+        ctx.save();
+        ctx.font = `${fl.crit ? '900 22px' : '800 16px'} "Noto Serif TC", sans-serif`;
+        ctx.textAlign = 'center'; ctx.lineWidth = 3.5; ctx.strokeStyle = 'rgba(20, 11, 5, 0.95)';
+        ctx.strokeText(fl.text, fl.x, fl.y);
+        ctx.fillStyle = fl.color || '#fff'; ctx.fillText(fl.text, fl.x, fl.y);
+        ctx.restore();
+      });
+
+      const selTower = state.towers.find(t => t.id === state.selectedTowerId);
+      if (selTower) {
+        const r = getTowerStats(selTower).range;
+        ctx.save(); ctx.translate(selTower.x, selTower.y);
+        ctx.strokeStyle = selTower.level === 4 ? 'rgba(103, 232, 249, 0.95)' : 'rgba(255, 224, 130, 0.92)';
+        ctx.fillStyle = 'rgba(255, 215, 110, 0.08)'; ctx.lineWidth = 2.4; ctx.setLineDash([10, 6]); ctx.lineDashOffset = -state.time * 24;
+        ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+
+    // ==================== 9. INTERACTIONS, FUSION & OVERCLOCK ====================
+    function performFusion(mainTower, partnerTower) {
+      const cost = getFusionCost(mainTower);
+      if (state.gold < cost) { showBanner(`🪙 金幣不足！合成需要 ${cost} 金幣`, 2000); return; }
+      const fKey = getFusionKey(mainTower.type, partnerTower.type);
+      const fDef = FUSION_DEFS[fKey];
+      if (!fDef) return;
+
+      state.gold -= cost;
+      mainTower.level = 4;
+      mainTower.fusionKey = fKey;
+      mainTower.spent = (mainTower.spent || 0) + (partnerTower.spent || 0) + cost;
+      mainTower.totalDamage = (mainTower.totalDamage || 0) + (partnerTower.totalDamage || 0);
+      mainTower.overclock = (mainTower.overclock || 0) + (partnerTower.overclock || 0);
+      state.towers = state.towers.filter(tw => tw.id !== partnerTower.id);
+
+      state.fusionSourceId = -1;
+      state.selectedTowerId = mainTower.id;
+      spawnParticles(mainTower.x, mainTower.y - 16, '#67e8f9', 36);
+      spawnParticles(partnerTower.x, partnerTower.y - 10, '#ffe066', 20);
+      state.shockwaves.push({ x: mainTower.x, y: mainTower.y, r: 10, maxR: 110, ttl: 0.45, color: '#67e8f9' });
+      state.shake = 7;
+      audio.playFusion();
+      showBanner(`⚗️ 鍊金合成成功！誕生 Lv.4 禁忌器械【${fDef.nameZh}】！（副塔方格已釋放）`, 3800);
+      updateHUD();
+      refreshFloatingMenu();
+    }
+
+    function overclockTower(t) {
+      if (!t || t.level < 3) return;
+      const cost = getOverclockCost(t);
+      if (state.gold < cost) return;
+      state.gold -= cost;
+      t.overclock = (t.overclock || 0) + 1;
+      t.spent += cost;
+      spawnParticles(t.x, t.y - 16, '#67e8f9', 22);
+      state.shockwaves.push({ x: t.x, y: t.y, r: 8, maxR: 52, ttl: 0.28, color: '#ffe066' });
+      audio.playBuild();
+      updateHUD();
+      refreshFloatingMenu();
+    }
+
+    function handleStageClick(x, y) {
+      audio.init();
+      const tile = worldToGrid(x, y);
+      if (!tile) { state.fusionSourceId = -1; closeFloatingMenu(); updateModeDockUI(); return; }
+
+      // Fusion Partner Selection Mode
+      if (state.fusionSourceId >= 0) {
+        const src = state.towers.find(t => t.id === state.fusionSourceId);
+        const partners = getEligibleFusionPartners(src);
+        const clickedPartner = partners.find(p => p.col === tile.col && p.row === tile.row);
+        if (clickedPartner) {
+          performFusion(src, clickedPartner);
+        } else {
+          state.fusionSourceId = -1;
+          updateModeDockUI();
+          showBanner('已取消鍊金合成選取。', 1500);
+        }
+        return;
+      }
+
+      const ev = evaluateTile(tile.col, tile.row);
+
+      if (ev.existingTower) {
+        clearQuickBuild();
+        state.selectedTowerId = ev.existingTower.id;
+        state.selectedTrapId = -1;
+        state.pendingBuildTile = null;
+        refreshFloatingMenu();
+        return;
+      }
+
+      if (ev.existingTrap) {
+        clearQuickBuild();
+        state.selectedTrapId = ev.existingTrap.id;
+        state.selectedTowerId = -1;
+        state.pendingBuildTile = null;
+        refreshFloatingMenu();
+        return;
+      }
+
+      if (ev.existingProp) {
+        clearQuickBuild();
+        state.priorityPropId = state.priorityPropId === ev.existingProp.id ? -1 : ev.existingProp.id;
+        showBanner(state.priorityPropId === -1 ? '已取消障礙物強制集火。' : '🎯 已強制集火書桌障礙物！範圍內砲塔將優先拆除它。', 2600);
+        closeFloatingMenu();
+        return;
+      }
+
+      if (state.quickBuild) {
+        const qb = state.quickBuild;
+        if (qb.mode === 'tower') {
+          if (!ev.validTower) { showBanner(`⚠️ ${ev.reason || '此格無法建造魔導器械'}`, 1800); return; }
+          const cost = getBuildCost(qb.type, !!ev.isCursedAltar);
+          if (state.gold < cost) { showBanner(`🪙 金幣不足！需要 ${cost} 金幣`, 1800); return; }
+          buildTowerAt(tile.col, tile.row, qb.type, true);
+          return;
+        } else {
+          if (!ev.validTrap) { showBanner('⚠️ 路線陷阱僅能鋪設於空水銀軌道格！', 1800); return; }
+          if (state.gold < qb.cost) { showBanner(`🪙 金幣不足！需要 ${qb.cost} 金幣`, 1800); return; }
+          buildRouteTrapAt(tile.col, tile.row, qb.kind, qb.cost, true);
+          return;
+        }
+      }
+
+      if (ev.validTower || ev.validTrap) {
+        state.selectedTowerId = -1;
+        state.selectedTrapId = -1;
+        state.pendingBuildTile = {
+          col: tile.col, row: tile.row, onPath: !!ev.validTrap,
+          isGolden: !!ev.isGolden, isAstralDais: !!ev.isAstralDais,
+          isCursedAltar: !!ev.isCursedAltar, isHotspot: !!ev.isHotspot
+        };
+        refreshFloatingMenu();
+      } else {
+        closeFloatingMenu();
+        if (ev.reason) showBanner(`⚠️ ${ev.reason}`, 2000);
+      }
+    }
+
+    function refreshFloatingMenu() {
+      const menu = document.getElementById('floating-menu');
+      const selTower = state.towers.find(t => t.id === state.selectedTowerId);
+      const selTrap = state.routeTraps.find(tr => tr.id === state.selectedTrapId);
+      const buildTile = state.pendingBuildTile;
+
+      if (!selTower && !selTrap && !buildTile) { menu.classList.add('hidden'); return; }
+
+      const anchor = selTower ? { x: selTower.x, y: selTower.y } : selTrap ? { x: selTrap.x, y: selTrap.y } : tileCenter(buildTile.col, buildTile.row);
+      const rect = canvas.getBoundingClientRect();
+      const sx = rect.left + (anchor.x / LOGICAL_W) * rect.width;
+      const sy = rect.top + (anchor.y / LOGICAL_H) * rect.height;
+      menu.style.left = `${Math.min(window.innerWidth - 400, Math.max(12, sx + 32))}px`;
+      menu.style.top = `${Math.min(window.innerHeight - 440, Math.max(72, sy - 120))}px`;
+      menu.classList.remove('hidden');
+
+      const body = document.getElementById('fmenu-body');
+
+      if (selTrap) {
+        const name = selTrap.kind === 'wax' ? '🔴 皇家火漆爆破印' : '❄️ 極寒水銀漩渦陣';
+        const refund = Math.round((selTrap.kind === 'wax' ? 45 : 50) * (selTrap.charges / selTrap.maxCharges) * 0.8);
+        document.getElementById('fmenu-title').textContent = name;
+        document.getElementById('fmenu-sub').textContent = `剩餘觸發次數：${selTrap.charges} / ${selTrap.maxCharges}`;
+        body.innerHTML = `<button id="btn-sell-trap" class="wax-btn w-full py-2.5 rounded-lg text-sm font-black">拆除陷阱 (退還 +${refund} 🪙)</button>`;
+        document.getElementById('btn-sell-trap').onclick = () => {
+          state.gold += refund;
+          state.routeTraps = state.routeTraps.filter(tr => tr.id !== selTrap.id);
+          audio.playBuild(); closeFloatingMenu(); updateHUD();
+        };
+        return;
+      }
+
+      if (buildTile && buildTile.onPath) {
+        document.getElementById('fmenu-title').textContent = '⚙️ 水銀軌道符文陷阱';
+        document.getElementById('fmenu-sub').textContent = buildTile.isHotspot ? '🔥 高熱節點格｜可鋪設路線陷阱' : '魔物踩踏時觸發（快捷鍵 1~2）';
+        const traps = [
+          { kind: 'wax', key: '1', name: '皇家火漆爆破印', desc: '觸發 4 次｜定身 1.4s + 黑墨 + 高額真傷', cost: 45 },
+          { kind: 'mercury', key: '2', name: '極寒水銀漩渦陣', desc: '觸發 5 次｜水銀浸潤 + 緩速 60% + 脆弱 25%', cost: 50 }
+        ];
+        body.innerHTML = traps.map(tr => `
+          <button data-trap="${tr.kind}" data-cost="${tr.cost}" ${state.gold >= tr.cost ? '' : 'disabled'} class="brass-btn w-full p-3 rounded-lg text-left flex items-center justify-between gap-2">
+            <div><div class="text-sm font-black text-cyan-200">[${tr.key}] ${tr.name}</div><div class="text-xs text-amber-100/85 mt-0.5">${tr.desc}</div></div>
+            <span class="px-2.5 py-1 rounded bg-black/50 text-sm font-black text-amber-300 shrink-0">🪙 ${tr.cost}</span>
+          </button>`).join('');
+        body.querySelectorAll('[data-trap]').forEach(btn => {
+          btn.onclick = () => buildRouteTrapAt(buildTile.col, buildTile.row, btn.dataset.trap, parseInt(btn.dataset.cost, 10), false);
+        });
+        return;
+      }
+
+      if (buildTile) {
+        const bonus = getTerrainBonusLabel(buildTile.isGolden, buildTile.isAstralDais, buildTile.isCursedAltar);
+        document.getElementById('fmenu-title').textContent = bonus || `部署魔導器械 (${buildTile.col + 1}, ${buildTile.row + 1})`;
+        document.getElementById('fmenu-sub').textContent = '點擊下方器械建造（快捷鍵 1~4）';
+        body.innerHTML = TOWER_DEFS.map(def => {
+          const cost = getBuildCost(def.id, !!buildTile.isCursedAltar);
+          return `
+            <button data-build="${def.id}" ${state.gold >= cost ? '' : 'disabled'} class="brass-btn w-full p-2.5 rounded-lg text-left flex items-center justify-between gap-2">
+              <div><div class="text-sm font-black text-amber-200">[${def.id + 1}] ${def.nameZh}</div><div class="text-xs text-amber-100/85 mt-0.5">${def.roleZh}</div></div>
+              <span class="px-2.5 py-1 rounded bg-black/50 text-sm font-black text-amber-300 shrink-0">🪙 ${cost}</span>
+            </button>`;
+        }).join('');
+        body.querySelectorAll('[data-build]').forEach(btn => {
+          btn.onclick = () => buildTowerAt(buildTile.col, buildTile.row, parseInt(btn.dataset.build, 10), false);
+        });
+        return;
+      }
+
+      if (selTower) {
+        const t = selTower;
+        const isFusion = t.level === 4 && t.fusionKey && FUSION_DEFS[t.fusionKey];
+        const def = isFusion ? FUSION_DEFS[t.fusionKey] : TOWER_DEFS[t.type];
+        const curSt = getTowerStats(t);
+        const oc = t.overclock || 0;
+        const bonusLabel = getTerrainBonusLabel(t.isGolden, t.isAstralDais, t.isCursedAltar);
+
+        document.getElementById('fmenu-title').textContent = `${def.nameZh} (Lv.${t.level}${oc > 0 ? ` +${oc}` : ''})`;
+        document.getElementById('fmenu-sub').textContent = bonusLabel || def.roleZh;
+
+        let html = `
+          <div class="px-3 py-2 rounded-lg bg-black/50 border border-amber-500/35 text-sm flex items-center justify-between text-amber-100">
+            <span>⚔️ 傷害 <strong class="text-amber-300">${Math.round(curSt.dmg)}</strong>｜🎯 射程 <strong class="text-emerald-300">${Math.round(curSt.range)}</strong>｜⚡ <strong class="text-cyan-300">${(1 / curSt.rate).toFixed(1)}/s</strong></span>
+          </div>
+          <div class="px-3 py-1.5 rounded-lg bg-black/40 border border-amber-500/20 text-sm text-amber-200/95 flex justify-between font-bold">
+            <span>📊 累計造成傷害</span>
+            <span class="text-amber-300 font-black">${Math.round(t.totalDamage || 0).toLocaleString()}</span>
+          </div>
+        `;
+
+        if (t.level === 1) {
+          const upCost = getUpgradeCost(t);
+          const nextSt = getTowerStats({ ...t, level: 2 });
+          html += `
+            <button id="btn-up-lv2" ${state.gold >= upCost ? '' : 'disabled'} class="emerald-btn w-full p-3 rounded-lg text-left flex items-center justify-between gap-2">
+              <div><div class="text-sm font-black">⬆️ 升級至 Lv.2 精密齒輪座</div><div class="text-xs opacity-90 mt-0.5">傷害 ${Math.round(curSt.dmg)}→${Math.round(nextSt.dmg)}｜射程 ${Math.round(curSt.range)}→${Math.round(nextSt.range)}</div></div>
+              <span class="font-black text-sm shrink-0">🪙 ${upCost}</span>
+            </button>`;
+        } else if (t.level === 2) {
+          const upCost = getUpgradeCost(t);
+          html += `
+            <button id="btn-up-a" ${state.gold >= upCost ? '' : 'disabled'} class="brass-btn w-full p-2.5 rounded-lg text-left flex items-center justify-between gap-2 border-amber-400">
+              <div><div class="text-sm font-black text-amber-200">[Q] 分支 A：${def.branchAZh}</div><div class="text-xs text-amber-100/85 mt-0.5">${def.branchADescZh}</div></div>
+              <span class="font-black text-sm text-amber-300 shrink-0">🪙 ${upCost}</span>
+            </button>
+            <button id="btn-up-b" ${state.gold >= upCost ? '' : 'disabled'} class="emerald-btn w-full p-2.5 rounded-lg text-left flex items-center justify-between gap-2">
+              <div><div class="text-sm font-black">[E] 分支 B：${def.branchBZh}</div><div class="text-xs opacity-90 mt-0.5">${def.branchBDescZh}</div></div>
+              <span class="font-black text-sm shrink-0">🪙 ${upCost}</span>
+            </button>`;
+        } else {
+          // Lv.3 Fusion Check
+          if (t.level === 3) {
+            const partners = getEligibleFusionPartners(t);
+            const fCost = getFusionCost(t);
+            if (partners.length > 0) {
+              html += `
+                <button id="btn-start-fusion" ${state.gold >= fCost ? '' : 'disabled'} class="fusion-btn w-full p-3 rounded-lg text-left flex items-center justify-between gap-2">
+                  <div>
+                    <div class="text-sm font-black text-cyan-200">⚗️ 鍊金合成 Lv.4 禁忌器械</div>
+                    <div class="text-xs text-amber-100/90 mt-0.5">偵測到 ${partners.length} 座相鄰異種 Lv.3 副塔，點擊選擇合成</div>
+                  </div>
+                  <span class="font-black text-sm text-amber-300 shrink-0">🪙 ${fCost}</span>
+                </button>`;
+            }
+          }
+
+          // Infinite Alchemical Overclock (Lv.3 & Lv.4)
+          const ocCost = getOverclockCost(t);
+          html += `
+            <button id="btn-overclock" ${state.gold >= ocCost ? '' : 'disabled'} class="emerald-btn w-full p-3 rounded-lg text-left flex items-center justify-between gap-2 border-cyan-300">
+              <div>
+                <div class="text-sm font-black">⚡ 鍊金超頻 (+${oc + 1})</div>
+                <div class="text-xs opacity-95 mt-0.5">傷害 +15%｜射程 +4 (上限 +60)${t.isCursedAltar ? ' · 祭壇+30%' : ''}</div>
+              </div>
+              <span class="font-black text-sm shrink-0">🪙 ${ocCost}</span>
+            </button>`;
+        }
+
+        const refund = Math.round(t.spent * 0.8);
+        const modeNames = { front: '最逼近終點', back: '最遠離終點', tank: '血量最高', near: '距離最近' };
+        html += `
+          <div class="flex gap-2 pt-1">
+            <button id="btn-target-mode" class="brass-btn flex-1 py-2 px-3 rounded-lg text-sm font-bold">🎯 索敵: ${modeNames[t.targetMode]}</button>
+            <button id="btn-sell-tower" class="wax-btn py-2 px-3.5 rounded-lg text-sm font-bold shrink-0">出售 +${refund}</button>
+          </div>
+        `;
+        body.innerHTML = html;
+
+        const b2 = document.getElementById('btn-up-lv2'); if (b2) b2.onclick = () => upgradeTower(0);
+        const ba = document.getElementById('btn-up-a'); if (ba) ba.onclick = () => upgradeTower(0);
+        const bb = document.getElementById('btn-up-b'); if (bb) bb.onclick = () => upgradeTower(1);
+        const bf = document.getElementById('btn-start-fusion');
+        if (bf) bf.onclick = () => {
+          state.fusionSourceId = t.id;
+          closeFloatingMenu();
+          updateModeDockUI();
+          showBanner('⚗️ 請點擊畫面上高亮閃爍的相鄰異種 Lv.3 副塔完成合成！', 3200);
+        };
+        const boc = document.getElementById('btn-overclock'); if (boc) boc.onclick = () => overclockTower(t);
+        document.getElementById('btn-target-mode').onclick = () => {
+          const modes = ['front', 'tank', 'near', 'back'];
+          t.targetMode = modes[(modes.indexOf(t.targetMode) + 1) % modes.length];
+          refreshFloatingMenu();
+        };
+        document.getElementById('btn-sell-tower').onclick = () => {
+          state.gold += refund;
+          state.towers = state.towers.filter(tw => tw.id !== t.id);
+          audio.playBuild(); closeFloatingMenu(); updateHUD();
+        };
+      }
+    }
+
+    function closeFloatingMenu() {
+      state.selectedTowerId = -1;
+      state.selectedTrapId = -1;
+      state.pendingBuildTile = null;
+      document.getElementById('floating-menu').classList.add('hidden');
+    }
+
+    function buildRouteTrapAt(col, row, kind, cost, keepQuickMode = false) {
+      if (state.gold < cost) return;
+      const ev = evaluateTile(col, row);
+      if (!ev.validTrap) return;
+      const pos = tileCenter(col, row);
+      state.gold -= cost;
+      const maxCharges = kind === 'wax' ? 4 : 5;
+      state.routeTraps.push({ id: state.nextId++, col, row, x: pos.x, y: pos.y, kind, charges: maxCharges, maxCharges, cd: 0 });
+      spawnParticles(pos.x, pos.y, '#4dd0e1', 16);
+      audio.playBuild();
+      if (!keepQuickMode) closeFloatingMenu();
+      updateHUD();
+    }
+
+    function buildTowerAt(col, row, type, keepQuickMode = false) {
+      const ev = evaluateTile(col, row);
+      if (!ev.validTower) return;
+      const cost = getBuildCost(type, !!ev.isCursedAltar);
+      if (state.gold < cost) return;
+      const pos = tileCenter(col, row);
+      state.gold -= cost;
+      const newTower = {
+        id: state.nextId++, type, col, row, x: pos.x, y: pos.y,
+        isGolden: !!ev.isGolden, isAstralDais: !!ev.isAstralDais, isCursedAltar: !!ev.isCursedAltar,
+        level: 1, branch: 0, overclock: 0, fusionKey: null, spent: cost, totalDamage: 0,
+        cd: 0.1, angle: 0, targetMode: 'front'
+      };
+      state.towers.push(newTower);
+      spawnParticles(pos.x, pos.y, '#ffe066', 16);
+      audio.playBuild();
+      if (!keepQuickMode) {
+        state.pendingBuildTile = null;
+        state.selectedTowerId = newTower.id;
+        refreshFloatingMenu();
+      }
+      updateHUD();
+    }
+
+    function upgradeTower(branch) {
+      const t = state.towers.find(tw => tw.id === state.selectedTowerId);
+      if (!t || t.level >= 3) return;
+      const cost = getUpgradeCost(t);
+      if (state.gold < cost) return;
+      state.gold -= cost;
+      t.level++; t.branch = branch; t.spent += cost;
+      spawnParticles(t.x, t.y - 12, '#68e0b8', 20);
+      audio.playBuild();
+      updateHUD();
+      refreshFloatingMenu();
+    }
+
+    // ==================== 10. MODALS RENDERING ====================
+    function renderTitleModal() {
+      document.getElementById('title-aether').textContent = state.aether;
+      document.querySelectorAll('.diff-btn').forEach(btn => {
+        btn.style.outline = parseInt(btn.dataset.diff, 10) === state.difficulty ? '2px solid #ffe066' : 'none';
+      });
+      const grid = document.getElementById('map-cards-grid');
+      grid.innerHTML = MAPS.map((m, i) => {
+        const stars = state.bestStars[i] || 0;
+        return `
+          <div class="bg-amber-950/15 border-2 border-amber-900/40 rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-xs font-black text-amber-900">MANUSCRIPT 0${i + 1}</span>
+                <span class="text-base text-amber-600">${'★'.repeat(stars)}${'☆'.repeat(3 - stars)}</span>
+              </div>
+              <h4 class="text-lg font-black text-amber-950 mb-1.5">${m.nameZh}</h4>
+              <p class="text-sm text-amber-900/90 mb-2 leading-relaxed">${m.descZh}</p>
+              <div class="text-xs font-bold text-amber-950 bg-amber-900/15 rounded-lg p-2 mb-3">${m.mechanicBadgeZh}</div>
+            </div>
+            <button data-start-map="${i}" class="wax-btn w-full py-2.5 rounded-lg text-sm font-black">⚔️ 展開手稿防衛</button>
+          </div>`;
+      }).join('');
+      grid.querySelectorAll('[data-start-map]').forEach(btn => {
+        btn.onclick = () => startMap(parseInt(btn.dataset.startMap, 10));
+      });
+    }
+
+    function renderTalentsModal() {
+      document.getElementById('talent-modal-aether').textContent = state.aether;
+      const grid = document.getElementById('talents-grid');
+      grid.innerHTML = TALENT_DEFS.map(t => {
+        const lv = state.talents[t.key] || 0;
+        const cost = t.cost + lv * 4;
+        const canBuy = lv < t.max && state.aether >= cost;
+        return `
+          <div class="p-3.5 rounded-xl bg-black/45 border border-amber-500/35 flex items-center justify-between gap-2">
+            <div><div class="text-base font-black text-amber-200">${t.nameZh} (${lv}/${t.max})</div><div class="text-sm text-amber-100/80 mt-0.5">${t.descZh}</div></div>
+            <button data-buy-talent="${t.key}" ${canBuy ? '' : 'disabled'} class="brass-btn px-3.5 py-2 rounded-lg text-sm font-bold shrink-0">${lv >= t.max ? '已滿級' : `✦ ${cost}`}</button>
+          </div>`;
+      }).join('');
+      grid.querySelectorAll('[data-buy-talent]').forEach(btn => {
+        btn.onclick = () => {
+          const k = btn.dataset.buyTalent, def = TALENT_DEFS.find(d => d.key === k), lv = state.talents[k] || 0, cost = def.cost + lv * 4;
+          if (lv < def.max && state.aether >= cost) {
+            state.aether -= cost; state.talents[k] = lv + 1; saveProgress();
+            renderTalentsModal(); renderTitleModal(); updateHUD();
+          }
+        };
+      });
+    }
+
+    function renderCodexModal() {
+      const basics = [
+        { title: '🖋️ 發條鋼筆弩 (+50% 對空特攻)', desc: '塗抹黑墨水 4.5s 封鎖回血；Lv3 分支 A 具備 2.4x 高額暴擊與永久破甲。' },
+        { title: '💧 封蠟與水銀儀 (控場與沸騰觸媒)', desc: '使地面魔物浸潤水銀；若被稜鏡或臼砲擊中將引發【沸騰蒸氣真傷爆破】。' },
+        { title: '🔮 稜鏡聚光儀 (貫穿/雙倍破盾)', desc: '直線貫穿光束對奧術護盾造成雙倍破盾；Lv3 太陽焦點可遞增至 280% 傷害。' },
+        { title: '🧪 紅蓮燒瓶臼砲 (預判彈道群傷)', desc: '自動預判敵人走位投擲；擊中黑墨目標觸發燃墨暴擊且濺射半徑 +25%。' }
+      ];
+      const fusions = Object.values(FUSION_DEFS);
+      document.getElementById('codex-body').innerHTML = `
+        <div>
+          <h4 class="text-base font-black text-amber-300 mb-2.5">⚙️ 基礎魔導器械與元素共鳴</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            ${basics.map(it => `<div class="p-3.5 rounded-xl bg-black/45 border border-amber-500/35"><div class="font-black text-amber-200 text-base mb-1">${it.title}</div><div class="text-amber-100/85">${it.desc}</div></div>`).join('')}
+          </div>
+        </div>
+        <div>
+          <h4 class="text-base font-black text-cyan-300 mb-2.5">⚗️ Lv.4 滿級異種合成配方（相鄰 1 格不同 Lv.3 砲塔 + 80 金幣）</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            ${fusions.map(f => `
+              <div class="p-3.5 rounded-xl bg-cyan-950/35 border border-cyan-400/45">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-black text-cyan-200 text-base">${f.nameZh}</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-black/50 text-amber-300 font-bold">${f.recipeZh}</span>
+                </div>
+                <div class="text-amber-100/90">${f.roleZh}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // ==================== 11. EVENT LISTENERS ====================
+    canvas.addEventListener('pointermove', (ev) => {
+      const rect = canvas.getBoundingClientRect();
+      state.hoverTile = worldToGrid((ev.clientX - rect.left) * (LOGICAL_W / rect.width), (ev.clientY - rect.top) * (LOGICAL_H / rect.height));
+    });
+
+    canvas.addEventListener('contextmenu', (ev) => {
+      ev.preventDefault();
+      state.fusionSourceId = -1;
+      clearQuickBuild();
+      state.aimingSpell = -1;
+      closeFloatingMenu();
+      updateHUD();
+    });
+
+    canvas.addEventListener('pointerdown', (ev) => {
+      if (ev.button === 2) return;
+      audio.init();
+      const rect = canvas.getBoundingClientRect();
+      const x = (ev.clientX - rect.left) * (LOGICAL_W / rect.width);
+      const y = (ev.clientY - rect.top) * (LOGICAL_H / rect.height);
+
+      if (state.aimingSpell === 0) {
+        state.aimingSpell = -1;
+        state.spells[0].cd = state.spells[0].maxCd;
+        state.shockwaves.push({ x, y, r: 10, maxR: 135, ttl: 0.45, color: '#ff4d4d' });
+        spawnParticles(x, y, '#ff6b4a', 32);
+        state.shake = 10;
+        audio.playBlast();
+        state.enemies.slice().forEach(e => {
+          if (Math.hypot(e.x - x, e.y - y) <= 135) {
+            e.shieldHits = 0; e.stunTimer = 3.0;
+            damageEnemy(e, 180 + state.wave * 35, 3, true, true);
+          }
+        });
+        updateHUD();
+        return;
+      }
+      handleStageClick(x, y);
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); sendNextWave(); }
+      else if (e.key >= '1' && e.key <= '6') {
+        const num = parseInt(e.key, 10);
+        if (state.pendingBuildTile) {
+          if (state.pendingBuildTile.onPath) {
+            if (num === 1) buildRouteTrapAt(state.pendingBuildTile.col, state.pendingBuildTile.row, 'wax', 45, false);
+            else if (num === 2) buildRouteTrapAt(state.pendingBuildTile.col, state.pendingBuildTile.row, 'mercury', 50, false);
+          } else if (num <= 4) buildTowerAt(state.pendingBuildTile.col, state.pendingBuildTile.row, num - 1, false);
+        } else {
+          if (num <= 4) setQuickBuild({ mode: 'tower', type: num - 1 });
+          else if (num === 5) setQuickBuild({ mode: 'trap', kind: 'wax', cost: 45 });
+          else if (num === 6) setQuickBuild({ mode: 'trap', kind: 'mercury', cost: 50 });
+        }
+      }
+      else if (e.key === 'q' || e.key === 'Q') upgradeTower(0);
+      else if (e.key === 'e' || e.key === 'E') upgradeTower(1);
+      else if (e.key === 'z' || e.key === 'Z') document.getElementById('btn-spell-0').click();
+      else if (e.key === 'c' || e.key === 'C') document.getElementById('btn-spell-1').click();
+      else if (e.key === 'Escape') {
+        state.fusionSourceId = -1; clearQuickBuild(); state.aimingSpell = -1; closeFloatingMenu(); updateHUD();
+      }
+    });
+
+    document.querySelectorAll('.qbuild-btn').forEach(btn => {
+      btn.onclick = () => {
+        audio.init();
+        if (btn.dataset.qmode === 'tower') setQuickBuild({ mode: 'tower', type: parseInt(btn.dataset.qid, 10) });
+        else setQuickBuild({ mode: 'trap', kind: btn.dataset.qkind, cost: parseInt(btn.dataset.qcost, 10) });
+      };
+    });
+
+    document.getElementById('mode-cancel-pill').onclick = () => { state.fusionSourceId = -1; clearQuickBuild(); updateHUD(); };
+    document.getElementById('btn-close-fmenu').onclick = closeFloatingMenu;
+    document.getElementById('btn-next-wave').onclick = sendNextWave;
+    document.getElementById('btn-hud-audio').onclick = () => { audio.init(); document.getElementById('modal-audio').classList.remove('hidden'); };
+    document.getElementById('btn-speed').onclick = (e) => { state.speed = state.speed === 1 ? 2 : state.speed === 2 ? 4 : 1; e.currentTarget.textContent = `${state.speed}x`; };
+    document.getElementById('btn-autowave').onclick = (e) => { state.autoWave = !state.autoWave; e.currentTarget.textContent = `自動: ${state.autoWave ? 'ON' : 'OFF'}`; };
+    document.getElementById('btn-pause').onclick = (e) => { state.paused = !state.paused; e.currentTarget.textContent = state.paused ? '繼續' : '暫停'; };
+    document.getElementById('btn-music').onclick = (e) => { audio.musicOn = !audio.musicOn; e.currentTarget.style.opacity = audio.musicOn ? '1' : '0.45'; };
+    document.getElementById('btn-sfx').onclick = (e) => { audio.sfxOn = !audio.sfxOn; e.currentTarget.style.opacity = audio.sfxOn ? '1' : '0.45'; };
+    document.getElementById('btn-menu').onclick = () => { state.paused = true; renderTitleModal(); document.getElementById('modal-title').classList.remove('hidden'); };
+    document.getElementById('btn-open-talents').onclick = () => { renderTalentsModal(); document.getElementById('modal-talents').classList.remove('hidden'); };
+    document.getElementById('btn-title-talents').onclick = () => { renderTalentsModal(); document.getElementById('modal-talents').classList.remove('hidden'); };
+    document.getElementById('btn-close-talents').onclick = () => document.getElementById('modal-talents').classList.add('hidden');
+    document.getElementById('btn-open-codex').onclick = () => { renderCodexModal(); document.getElementById('modal-codex').classList.remove('hidden'); };
+    document.getElementById('btn-codex-main').onclick = () => { renderCodexModal(); document.getElementById('modal-codex').classList.remove('hidden'); };
+    document.getElementById('btn-close-codex').onclick = () => document.getElementById('modal-codex').classList.add('hidden');
+
+    document.getElementById('btn-spell-0').onclick = () => {
+      if (state.spells[0].cd > 0) return;
+      state.fusionSourceId = -1; clearQuickBuild();
+      state.aimingSpell = state.aimingSpell === 0 ? -1 : 0;
+      showBanner('☄️ 請點擊場上任意位置降下【皇家火漆隕落】（範圍破盾 + 強制定身 3 秒）！', 2500);
+      updateHUD();
+    };
+    document.getElementById('btn-spell-1').onclick = () => {
+      if (state.spells[1].cd > 0) return;
+      state.spells[1].cd = state.spells[1].maxCd;
+      state.chronoTimer = 6.0;
+      showBanner('⏳ 【時光懷錶凝滯】啟動！全場魔物緩速 75%，所有魔導器械攻速提升 35%！', 2800);
+      audio.playBuild(); updateHUD();
+    };
+
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.onclick = () => { state.difficulty = parseInt(btn.dataset.diff, 10); saveProgress(); renderTitleModal(); updateHUD(); };
+    });
+
+    document.getElementById('btn-res-retry').onclick = () => startMap(state.mapIndex);
+    document.getElementById('btn-res-endless').onclick = () => {
+      state.endless = true; state.paused = false;
+      document.getElementById('modal-result').classList.add('hidden');
+      sendNextWave();
+    };
+    document.getElementById('btn-res-menu').onclick = () => {
+      document.getElementById('modal-result').classList.add('hidden');
+      renderTitleModal(); document.getElementById('modal-title').classList.remove('hidden');
+    };
+
+    document.getElementById('btn-start-main').onclick = () => {
+      audio.init(); audio.playBuild();
+      document.getElementById('start-cover-screen').classList.add('hidden');
+      renderTitleModal(); document.getElementById('modal-title').classList.remove('hidden');
+    };
+    document.getElementById('btn-back-cover').onclick = () => {
+      document.getElementById('modal-title').classList.add('hidden');
+      document.getElementById('start-cover-screen').classList.remove('hidden');
+    };
+    document.getElementById('btn-audio-main').onclick = () => { audio.init(); document.getElementById('modal-audio').classList.remove('hidden'); };
+    document.getElementById('btn-close-audio').onclick = () => document.getElementById('modal-audio').classList.add('hidden');
+    document.getElementById('btn-save-audio').onclick = () => { saveProgress(); document.getElementById('modal-audio').classList.add('hidden'); };
+
+    document.getElementById('rng-vol-master').oninput = (e) => { audio.masterVol = parseInt(e.target.value, 10) / 100; document.getElementById('val-vol-master').textContent = `${e.target.value}%`; };
+    document.getElementById('rng-vol-music').oninput = (e) => { audio.musicVol = parseInt(e.target.value, 10) / 100; document.getElementById('val-vol-music').textContent = `${e.target.value}%`; };
+    document.getElementById('rng-vol-sfx').oninput = (e) => { audio.sfxVol = parseInt(e.target.value, 10) / 100; document.getElementById('val-vol-sfx').textContent = `${e.target.value}%`; };
+    document.getElementById('inp-bgm-file').onchange = (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      if (audio.customBgmEl) audio.customBgmEl.pause();
+      const el = new Audio(URL.createObjectURL(f));
+      el.loop = true; el.volume = audio.masterVol * audio.musicVol; el.play().catch(() => {});
+      audio.customBgmEl = el;
+      document.getElementById('bgm-source-label').textContent = `目前播放自訂音樂：${f.name}`;
+    };
+
+    // ==================== 12. MAIN LOOP ====================
+    let lastTime = performance.now();
+    function loop(now) {
+      const rawDt = Math.min(0.05, (now - lastTime) / 1000);
+      lastTime = now;
+      if (!state.paused) {
+        const scaled = rawDt * state.speed;
+        const steps = Math.max(1, Math.ceil(scaled / 0.016));
+        const subDt = scaled / steps;
+        for (let s = 0; s < steps; s++) simulateStep(subDt);
+      }
+      drawScene();
+      requestAnimationFrame(loop);
+    }
+
+    window.onload = () => {
+      loadProgress();
+      document.getElementById('rng-vol-master').value = Math.round(audio.masterVol * 100);
+      document.getElementById('val-vol-master').textContent = `${Math.round(audio.masterVol * 100)}%`;
+      document.getElementById('rng-vol-music').value = Math.round(audio.musicVol * 100);
+      document.getElementById('val-vol-music').textContent = `${Math.round(audio.musicVol * 100)}%`;
+      document.getElementById('rng-vol-sfx').value = Math.round(audio.sfxVol * 100);
+      document.getElementById('val-vol-sfx').textContent = `${Math.round(audio.sfxVol * 100)}%`;
+
+      bakeBattlefieldCanvas(0);
+      bakeBattlefieldCanvas(1);
+      bakeBattlefieldCanvas(2);
+      startMap(0);
+      document.getElementById('start-cover-screen').classList.remove('hidden');
+      document.getElementById('modal-title').classList.add('hidden');
+      requestAnimationFrame(loop);
+    };
+  })();
+  </script>
+</body>
+</html>
