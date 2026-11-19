@@ -1,0 +1,16 @@
+{
+  "name": "鍊金術士的魔導書桌：大魔導書典藏版",
+  "short_name": "魔導書桌",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#140b06",
+  "theme_color": "#140b06",
+  "icons": [
+    {
+      "src": "./cover.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
